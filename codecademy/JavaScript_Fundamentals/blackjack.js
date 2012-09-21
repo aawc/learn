@@ -100,7 +100,7 @@ var Hand = function () {
 var playAsDealer = function () {
 	var hand = new Hand();
 	while (hand.score() < 17) {
-		hand.hitMe();
+		hand = new Hand();
 	}
 	
 	return hand;
