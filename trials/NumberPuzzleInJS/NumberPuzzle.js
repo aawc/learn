@@ -28,13 +28,9 @@ var Board = function (numRows) {
 			}
 		}
 		
-		var isDifferent = false;
-		for (var i = 0; i < this.maxTiles; i++) {
-			if (this.slotInWhichTileIsPlaced[i] !== this.finalPosition[i]) {
-				isDifferent = true;
-			}
-		}
-		if (!isDifferent) {
+		var inFinalState = this.isCurrentStateFinal();
+		if (inFinalState) {
+			// We've generated the final state as the starting state. Start over.
 			this.generateTileLocation();
 		} else {
 			for (var i = 0; i < this.maxTiles; i++) {
@@ -43,7 +39,18 @@ var Board = function (numRows) {
 			console.log(this.tileInEachSlot);
 		}
 	};
-	
+
+	this.isCurrentStateFinal = function () {
+		var isDifferent = false;
+		for (var i = 0; i < this.maxTiles; i++) {
+			if (this.slotInWhichTileIsPlaced[i] !== this.finalPosition[i]) {
+				isDifferent = true;
+			}
+		}
+		
+		return !isDifferent;
+	};
+
 	this.displayTileLocation = function (array) {
 		var s = "";
 		for (var i = 0; i < this.rows; i++) {
