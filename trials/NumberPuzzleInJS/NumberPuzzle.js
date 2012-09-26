@@ -28,13 +28,8 @@ var Board = function (numRows) {
 			}
 		}
 		
-		var isDifferent = false;
-		for (var i = 0; i < this.maxTiles; i++) {
-			if (this.slotInWhichTileIsPlaced[i] !== this.finalPosition[i]) {
-				isDifferent = true;
-			}
-		}
-		if (!isDifferent) {
+		var isFinal = this.isCurrentStateFinalState();
+		if (isFinal) {
 			this.generateTileLocation();
 		} else {
 			for (var i = 0; i < this.maxTiles; i++) {
@@ -43,7 +38,18 @@ var Board = function (numRows) {
 			console.log(this.tileInEachSlot);
 		}
 	};
-	
+
+	this.isCurrentStateFinalState = function () {
+		var isFinal = true;
+		for (var i = 0; i < this.maxTiles; i++) {
+			if (this.slotInWhichTileIsPlaced[i] !== this.finalPosition[i]) {
+				isFinal = false;
+			}
+		}
+		
+		return isFinal;
+	};
+
 	this.displayTileLocation = function (array) {
 		var s = "";
 		for (var i = 0; i < this.rows; i++) {
