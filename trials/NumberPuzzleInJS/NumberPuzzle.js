@@ -68,6 +68,7 @@ var Board = function (numRows) {
 		console.log(s);
 	};
 	
+	debugger;
 	this.generateFinalPosition();
 	this.generateTileLocation();
 	this.displayTileLocation(this.tileInEachSlot);
