@@ -60,7 +60,7 @@ class LinkedList
 			if (this->isCircular)
 			{
 				this->last->next = this->root;
-				cout << endl << "The list is circular!" << endl << endl;
+				cout << endl << "The list is circular!" << endl;
 			}
 
 			this->Display();
@@ -90,7 +90,7 @@ class LinkedList
 			bool loopDetected = this->HasLoop();
 			if (loopDetected)
 			{
-				cout << endl << "Loop detected!" << endl;
+				cout << "Loop detected!" << endl;
 			}
 			
 			return this->isCircular == loopDetected;
@@ -99,11 +99,17 @@ class LinkedList
 	private:
 		void Free (void)
 		{
+			if (this->last == NULL)
+			{
+				return;
+			}
+			this->last->next = NULL;
+
+			cout << endl << "Clearing list:" << endl;
 			Node* ptr = this->root;
 			while (ptr != NULL)
 			{
 				this->root = ptr->next;
-				this->last->next = this->root;
 
 				cout << "Deleting: " << ptr->info << endl;
 				delete ptr;
@@ -163,4 +169,5 @@ class LinkedListLoop
 int main (int argc, char* argv[])
 {
 	LinkedListLoop *loop = new LinkedListLoop();
+	delete loop; loop = NULL;
 }
