@@ -41,7 +41,7 @@ class InsertionSort
 					j--;
 				}
 				*(j+1) = key;
-				
+
 				std::cout << "After iteration " << (i - this->numbers.begin() + 1) << ":" << std::endl;
 				this->Display();
 			}
