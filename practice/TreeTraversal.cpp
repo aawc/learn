@@ -178,6 +178,9 @@ class BinaryTree
 				this->Free(node->left);
 				cout << "Deleting: " << node->info << endl;
 				this->Free(node->right);
+				
+				delete node;
+				node = NULL;
 			}
 		}
 };
