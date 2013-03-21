@@ -1,5 +1,6 @@
 #include <cstdlib>
-#include "../include/TreeTraversal.h"
+#include "../include/ThreadedBinaryTree.h"
+
 using namespace std;
 
 int main (int, char**)

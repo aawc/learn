@@ -34,8 +34,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="../include/TreeTraversal.h" />
-		<Unit filename="../src/TreeTraversal.cpp" />
+		<Unit filename="../include/BinaryTree.h" />
+		<Unit filename="../include/ThreadedBinaryTree.h" />
+		<Unit filename="../src/BinaryTree.cpp" />
 		<Unit filename="../src/main.cpp" />
 		<Extensions>
 			<code_completion />

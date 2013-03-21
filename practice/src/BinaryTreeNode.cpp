@@ -1,32 +1,29 @@
-#include <iostream>
-#include <cstdlib>
-#include <time.h>
-#include "../include/TreeTraversal.h"
+#include "../include/BinaryTreeNodeNode.h"
 using namespace std;
 
-BinaryTree::BinaryTree(void) : root(NULL)
+BinaryTreeNode::BinaryTreeNode(void) : root(NULL)
 {
     Init();
     this->Build();
 }
 
-BinaryTree::BinaryTree(const BinaryTree& b) : root(b.root)
+BinaryTreeNode::BinaryTreeNode(const BinaryTreeNode& b) : root(b.root)
 {
     Init();
 }
 
-BinaryTree& BinaryTree::operator=(const BinaryTree& b)
+BinaryTreeNode& BinaryTreeNode::operator=(const BinaryTreeNode& b)
 {
     this->root = b.root;
     return *this;
 }
 
-BinaryTree::~BinaryTree(void)
+BinaryTreeNode::~BinaryTreeNode(void)
 {
     this->Free(this->root);
 }
 
-void BinaryTree::Init(void)
+void BinaryTreeNode::Init(void)
 {
     if (!initialized)
     {
@@ -35,21 +32,20 @@ void BinaryTree::Init(void)
     }
 }
 
-void BinaryTree::Build(void)
+void BinaryTreeNode::Build(void)
 {
     int numberOfElements = rand() % MAX_ELEMENTS + 1;
     cout << "Number of elements: " << numberOfElements << endl;
     for (int i = 0; i < numberOfElements; i++)
     {
-        int info = rand();
-        TreeNode* node = new TreeNode();
+        BinaryTreeNodeNode* node = new BinaryTreeNodeNode();
         if (node == NULL)
         {
             cout << "Memory allocation failed!" << endl;
             this->Free(this->root);
             return;
         }
-        node->info = info;
+        node->setInfo(rand());
         node->left = NULL;
         node->right = NULL;
 
@@ -61,14 +57,14 @@ void BinaryTree::Build(void)
     this->DisplayPostOrder(this->root);
 }
 
-TreeNode* BinaryTree::FindPreOrderParent(int info, TreeNode* node)
+BinaryTreeNodeNode* BinaryTreeNode::FindPreOrderParent(int info, BinaryTreeNodeNode* node)
 {
     if (node == NULL)
     {
         return NULL;
     }
 
-    TreeNode* next = NULL;
+    BinaryTreeNodeNode* next = NULL;
     if (node->info < info)
     {
         next = this->FindPreOrderParent(info, node->right);
@@ -81,7 +77,7 @@ TreeNode* BinaryTree::FindPreOrderParent(int info, TreeNode* node)
     return (next == NULL) ? node : next;
 }
 
-void BinaryTree::DisplayPreOrder(TreeNode* node)
+void BinaryTreeNode::DisplayPreOrder(BinaryTreeNodeNode* node)
 {
     if (node == this->root)
     {
@@ -96,7 +92,7 @@ void BinaryTree::DisplayPreOrder(TreeNode* node)
     this->DisplayPreOrder(node->right);
 }
 
-void BinaryTree::DisplayInOrder(TreeNode* node)
+void BinaryTreeNode::DisplayInOrder(BinaryTreeNodeNode* node)
 {
     if (node == this->root)
     {
@@ -111,7 +107,7 @@ void BinaryTree::DisplayInOrder(TreeNode* node)
     this->DisplayInOrder(node->right);
 }
 
-void BinaryTree::DisplayPostOrder(TreeNode* node)
+void BinaryTreeNode::DisplayPostOrder(BinaryTreeNodeNode* node)
 {
     if (node == this->root)
     {
@@ -126,7 +122,7 @@ void BinaryTree::DisplayPostOrder(TreeNode* node)
     cout << node->info << endl;
 }
 
-void BinaryTree::InsertNode(TreeNode* parent, TreeNode* node)
+void BinaryTreeNode::InsertNode(BinaryTreeNodeNode* parent, BinaryTreeNodeNode* node)
 {
     if (node->info == parent->info)
     {
@@ -160,7 +156,7 @@ void BinaryTree::InsertNode(TreeNode* parent, TreeNode* node)
     }
 }
 
-void BinaryTree::InsertNode(TreeNode* node)
+void BinaryTreeNode::InsertNode(BinaryTreeNodeNode* node)
 {
     if (this->root == NULL)
     {
@@ -171,7 +167,7 @@ void BinaryTree::InsertNode(TreeNode* node)
     this->InsertNode(this->root, node);
 }
 
-void BinaryTree::Free(TreeNode* node)
+void BinaryTreeNode::Free(BinaryTreeNodeNode* node)
 {
     if (node != NULL)
     {
@@ -183,5 +179,6 @@ void BinaryTree::Free(TreeNode* node)
         node = NULL;
     }
 }
-bool BinaryTree::initialized;
-const int BinaryTree::MAX_ELEMENTS;
+bool BinaryTreeNode::initialized;
+const int BinaryTreeNode::MAX_ELEMENTS;
+

@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1363076680 source:e:\varun\github\learn\practice\src\binarytree.cpp
+	<iostream>
+	<cstdlib>
+	<time.h>
+	"../include/BinaryTree.h"
+
+1357906542 e:\varun\github\learn\practice\include\binarytree.h
+
+1363077000 source:e:\varun\github\learn\practice\src\main.cpp
+	<cstdlib>
+	"../include/BinaryTree.h"
+
