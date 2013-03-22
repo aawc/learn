@@ -1,35 +1,18 @@
 #include "BinaryTree.h"
 
-class ThreadedBinaryTreeNode : TreeNode
-{
-	// The pointers to previous and next nodes in-order.
-	tagThreadedBinaryTreeNode *previous;
-	tagThreadedBinaryTreeNode *next;
-};
-/*
-class ThreadedBinaryTree
-{
-	private:
-		ThreadedBinaryTreeNode* root;
-		static bool initialized;
-		static const int MAX_ELEMENTS = 15;
+class ThreadedBinaryTreeNode;
 
+class ThreadedBinaryTree : BinaryTree
+{
 	public:
-		class ThreadedBinaryTree(void);
+		ThreadedBinaryTree(void);
 		ThreadedBinaryTree(const ThreadedBinaryTree& b);
 		ThreadedBinaryTree& operator=(const ThreadedBinaryTree& b);
 
-		~ThreadedBinaryTree(void);
+		virtual ~ThreadedBinaryTree(void);
+
+		void BuildThreads(void);
 
 	private:
-	    static void Init(void);
-		void Build(void);
-		ThreadedBinaryTreeNode* FindPreOrderParent(int info, ThreadedBinaryTreeNode* node);
-		void DisplayPreOrder(ThreadedBinaryTreeNode* node);
-		void DisplayInOrder(ThreadedBinaryTreeNode* node);
-		void DisplayPostOrder(ThreadedBinaryTreeNode* node);
-		void InsertNode(ThreadedBinaryTreeNode* parent, ThreadedBinaryTreeNode* node);
-		void InsertNode(ThreadedBinaryTreeNode* node);
-		void Free(ThreadedBinaryTreeNode* node);
+		void BuildThreadsForNode(ThreadedBinaryTreeNode* node, ThreadedBinaryTreeNode* subTreePredecessor, ThreadedBinaryTreeNode* subTreeSuccessor, ThreadedBinaryTreeNode** first, ThreadedBinaryTreeNode** last);
 };
-*/

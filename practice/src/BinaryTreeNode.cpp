@@ -1,184 +1,53 @@
-#include "../include/BinaryTreeNodeNode.h"
+#include <cstdlib>
+#include "../include/BinaryTreeNode.h"
 using namespace std;
 
-BinaryTreeNode::BinaryTreeNode(void) : root(NULL)
+BinaryTreeNode::BinaryTreeNode(void) : info(0), left(NULL), right(NULL)
 {
-    Init();
-    this->Build();
 }
 
-BinaryTreeNode::BinaryTreeNode(const BinaryTreeNode& b) : root(b.root)
+BinaryTreeNode::BinaryTreeNode(const BinaryTreeNode& b) : info(b.info), left(b.left), right(b.right)
 {
-    Init();
 }
 
 BinaryTreeNode& BinaryTreeNode::operator=(const BinaryTreeNode& b)
 {
-    this->root = b.root;
+	this->info = b.info;
+    this->left = b.left;
+	this->right = b.right;
     return *this;
 }
 
 BinaryTreeNode::~BinaryTreeNode(void)
 {
-    this->Free(this->root);
 }
 
-void BinaryTreeNode::Init(void)
+int BinaryTreeNode::getInfo()
 {
-    if (!initialized)
-    {
-        srand(time(NULL));
-        initialized = true;
-    }
+	return this->info;
 }
 
-void BinaryTreeNode::Build(void)
+BinaryTreeNode* BinaryTreeNode::getLeft()
 {
-    int numberOfElements = rand() % MAX_ELEMENTS + 1;
-    cout << "Number of elements: " << numberOfElements << endl;
-    for (int i = 0; i < numberOfElements; i++)
-    {
-        BinaryTreeNodeNode* node = new BinaryTreeNodeNode();
-        if (node == NULL)
-        {
-            cout << "Memory allocation failed!" << endl;
-            this->Free(this->root);
-            return;
-        }
-        node->setInfo(rand());
-        node->left = NULL;
-        node->right = NULL;
-
-        this->InsertNode(node);
-    }
-
-    this->DisplayPreOrder(this->root);
-    this->DisplayInOrder(this->root);
-    this->DisplayPostOrder(this->root);
+	return this->left;
 }
 
-BinaryTreeNodeNode* BinaryTreeNode::FindPreOrderParent(int info, BinaryTreeNodeNode* node)
+BinaryTreeNode* BinaryTreeNode::getRight()
 {
-    if (node == NULL)
-    {
-        return NULL;
-    }
-
-    BinaryTreeNodeNode* next = NULL;
-    if (node->info < info)
-    {
-        next = this->FindPreOrderParent(info, node->right);
-    }
-    else if (node->info > info)
-    {
-        next = this->FindPreOrderParent(info, node->left);
-    }
-
-    return (next == NULL) ? node : next;
+	return this->right;
 }
 
-void BinaryTreeNode::DisplayPreOrder(BinaryTreeNodeNode* node)
+void BinaryTreeNode::setInfo(int value)
 {
-    if (node == this->root)
-    {
-        cout << "DisplayPreOrder:" << endl;
-    }
-    if (node == NULL)
-    {
-        return;
-    }
-    cout << node->info << endl;
-    this->DisplayPreOrder(node->left);
-    this->DisplayPreOrder(node->right);
+	this->info = value;
 }
 
-void BinaryTreeNode::DisplayInOrder(BinaryTreeNodeNode* node)
+void BinaryTreeNode::setLeft(BinaryTreeNode* value)
 {
-    if (node == this->root)
-    {
-        cout << "DisplayInOrder:" << endl;
-    }
-    if (node == NULL)
-    {
-        return;
-    }
-    this->DisplayInOrder(node->left);
-    cout << node->info << endl;
-    this->DisplayInOrder(node->right);
+	this->left = value;
 }
 
-void BinaryTreeNode::DisplayPostOrder(BinaryTreeNodeNode* node)
+void BinaryTreeNode::setRight(BinaryTreeNode* value)
 {
-    if (node == this->root)
-    {
-        cout << "DisplayPostOrder:" << endl;
-    }
-    if (node == NULL)
-    {
-        return;
-    }
-    this->DisplayPostOrder(node->left);
-    this->DisplayPostOrder(node->right);
-    cout << node->info << endl;
+	this->right = value;
 }
-
-void BinaryTreeNode::InsertNode(BinaryTreeNodeNode* parent, BinaryTreeNodeNode* node)
-{
-    if (node->info == parent->info)
-    {
-        cout << "Dropping: " << node->info << endl;
-        return;
-    }
-
-    if (node->info < parent->info)
-    {
-        if (parent->left == NULL)
-        {
-            parent->left = node;
-            cout << "Added: " << node->info << " to the left of: " << parent->info <<endl;
-        }
-        else
-        {
-        this->InsertNode(parent->left, node);
-        }
-    }
-    else
-    {
-        if (parent->right == NULL)
-        {
-            parent->right = node;
-            cout << "Added: " << node->info << " to the right of: " << parent->info <<endl;
-        }
-        else
-        {
-        this->InsertNode(parent->right, node);
-        }
-    }
-}
-
-void BinaryTreeNode::InsertNode(BinaryTreeNodeNode* node)
-{
-    if (this->root == NULL)
-    {
-        this->root = node;
-        cout << "Added as root: " << node->info << endl;
-        return;
-    }
-    this->InsertNode(this->root, node);
-}
-
-void BinaryTreeNode::Free(BinaryTreeNodeNode* node)
-{
-    if (node != NULL)
-    {
-        this->Free(node->left);
-        cout << "Deleting: " << node->info << endl;
-        this->Free(node->right);
-
-        delete node;
-        node = NULL;
-    }
-}
-bool BinaryTreeNode::initialized;
-const int BinaryTreeNode::MAX_ELEMENTS;
-

@@ -1,8 +1,8 @@
-#include "BinaryTreeNode.h"
+class BinaryTreeNode;
 
 class BinaryTree
 {
-	private:
+	protected:
 		BinaryTreeNode* root;
 		static bool initialized;
 		static const int MAX_ELEMENTS = 15;
@@ -14,7 +14,7 @@ class BinaryTree
 
 		virtual ~BinaryTree(void);
 
-	private:
+	protected:
 	    static void Init(void);
 		void Build(void);
 		BinaryTreeNode* FindPreOrderParent(int info, BinaryTreeNode* node);

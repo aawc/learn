@@ -15,6 +15,6 @@ class BinaryTreeNode
 		BinaryTreeNode* getLeft();
 		BinaryTreeNode* getRight();
 		void setInfo(int);
-		void setLeft(BinaryTreeNode *);
-		void setRight(BinaryTreeNode *);
+		void setLeft(BinaryTreeNode*);
+		void setRight(BinaryTreeNode*);
 };

@@ -5,7 +5,7 @@ using namespace std;
 
 int main (int, char**)
 {
-	BinaryTree *tree = new BinaryTree();
-	delete tree; tree = NULL;
+	ThreadedBinaryTree *threadedBinaryTree = new ThreadedBinaryTree();
+	delete threadedBinaryTree; threadedBinaryTree = NULL;
 	return 0;
 }

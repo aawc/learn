@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <time.h>
+#include "../include/BinaryTreeNode.h"
 #include "../include/BinaryTree.h"
 using namespace std;
 
@@ -49,8 +50,8 @@ void BinaryTree::Build(void)
             return;
         }
         node->setInfo(rand());
-        node->left = NULL;
-        node->right = NULL;
+        node->setLeft(NULL);
+        node->setRight(NULL);
 
         this->InsertNode(node);
     }
@@ -68,13 +69,13 @@ BinaryTreeNode* BinaryTree::FindPreOrderParent(int info, BinaryTreeNode* node)
     }
 
     BinaryTreeNode* next = NULL;
-    if (node->info < info)
+    if (node->getInfo() < info)
     {
-        next = this->FindPreOrderParent(info, node->right);
+        next = this->FindPreOrderParent(info, node->getRight());
     }
-    else if (node->info > info)
+    else if (node->getInfo() > info)
     {
-        next = this->FindPreOrderParent(info, node->left);
+        next = this->FindPreOrderParent(info, node->getLeft());
     }
 
     return (next == NULL) ? node : next;
@@ -90,9 +91,9 @@ void BinaryTree::DisplayPreOrder(BinaryTreeNode* node)
     {
         return;
     }
-    cout << node->info << endl;
-    this->DisplayPreOrder(node->left);
-    this->DisplayPreOrder(node->right);
+    cout << node->getInfo() << endl;
+    this->DisplayPreOrder(node->getLeft());
+    this->DisplayPreOrder(node->getRight());
 }
 
 void BinaryTree::DisplayInOrder(BinaryTreeNode* node)
@@ -105,9 +106,9 @@ void BinaryTree::DisplayInOrder(BinaryTreeNode* node)
     {
         return;
     }
-    this->DisplayInOrder(node->left);
-    cout << node->info << endl;
-    this->DisplayInOrder(node->right);
+    this->DisplayInOrder(node->getLeft());
+    cout << node->getInfo() << endl;
+    this->DisplayInOrder(node->getRight());
 }
 
 void BinaryTree::DisplayPostOrder(BinaryTreeNode* node)
@@ -120,41 +121,41 @@ void BinaryTree::DisplayPostOrder(BinaryTreeNode* node)
     {
         return;
     }
-    this->DisplayPostOrder(node->left);
-    this->DisplayPostOrder(node->right);
-    cout << node->info << endl;
+    this->DisplayPostOrder(node->getLeft());
+    this->DisplayPostOrder(node->getRight());
+    cout << node->getInfo() << endl;
 }
 
 void BinaryTree::InsertNode(BinaryTreeNode* parent, BinaryTreeNode* node)
 {
-    if (node->info == parent->info)
+    if (node->getInfo() == parent->getInfo())
     {
-        cout << "Dropping: " << node->info << endl;
+        cout << "Dropping: " << node->getInfo() << endl;
         return;
     }
 
-    if (node->info < parent->info)
+    if (node->getInfo() < parent->getInfo())
     {
-        if (parent->left == NULL)
+        if (parent->getLeft() == NULL)
         {
-            parent->left = node;
-            cout << "Added: " << node->info << " to the left of: " << parent->info <<endl;
+            parent->setLeft(node);
+            cout << "Added: " << node->getInfo() << " to the left of: " << parent->getInfo() <<endl;
         }
         else
         {
-        this->InsertNode(parent->left, node);
+        this->InsertNode(parent->getLeft(), node);
         }
     }
     else
     {
-        if (parent->right == NULL)
+        if (parent->getRight() == NULL)
         {
-            parent->right = node;
-            cout << "Added: " << node->info << " to the right of: " << parent->info <<endl;
+            parent->setRight(node);
+            cout << "Added: " << node->getInfo() << " to the right of: " << parent->getInfo() <<endl;
         }
         else
         {
-        this->InsertNode(parent->right, node);
+        this->InsertNode(parent->getRight(), node);
         }
     }
 }
@@ -164,7 +165,7 @@ void BinaryTree::InsertNode(BinaryTreeNode* node)
     if (this->root == NULL)
     {
         this->root = node;
-        cout << "Added as root: " << node->info << endl;
+        cout << "Added as root: " << node->getInfo() << endl;
         return;
     }
     this->InsertNode(this->root, node);
@@ -174,9 +175,9 @@ void BinaryTree::Free(BinaryTreeNode* node)
 {
     if (node != NULL)
     {
-        this->Free(node->left);
-        cout << "Deleting: " << node->info << endl;
-        this->Free(node->right);
+        this->Free(node->getLeft());
+        cout << "Deleting: " << node->getInfo() << endl;
+        this->Free(node->getRight());
 
         delete node;
         node = NULL;
