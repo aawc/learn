@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cstdlib>
-#include <time.h>
 #include "../include/ThreadedBinaryTreeNode.h"
 #include "../include/ThreadedBinaryTree.h"
 using namespace std;
@@ -15,6 +14,7 @@ ThreadedBinaryTree::ThreadedBinaryTree(const ThreadedBinaryTree& b) : BinaryTree
 
 ThreadedBinaryTree& ThreadedBinaryTree::operator=(const ThreadedBinaryTree& b)
 {
+    if (this == &b) return *this; // handle self assignment
 	BinaryTree::operator=(b);
     return *this;
 }
@@ -44,7 +44,7 @@ void ThreadedBinaryTree::BuildThreadsForNode(ThreadedBinaryTreeNode* node, Threa
 
 		leftLast->setNext(node);
 		rightFirst->setPrevious(node);
-		
+
 		first = &leftFirst;
 		last = &rightLast;
 	}
@@ -66,10 +66,10 @@ void ThreadedBinaryTree::BuildThreadsForNode(ThreadedBinaryTreeNode* node, Threa
 		//subTreeSuccessor->setPrevious(node);
 		node->setPrevious(leftLast);
 		node->setNext(subTreeSuccessor);
-		
+
 		leftLast->setNext(node);
 		subTreeSuccessor->setPrevious(node);
-		
+
 		first = &leftFirst;
 		last = &node;
 	}
@@ -84,7 +84,7 @@ void ThreadedBinaryTree::BuildThreadsForNode(ThreadedBinaryTreeNode* node, Threa
 
 		rightFirst->setPrevious(node);
 		subTreePredecessor->setNext(node);
-		
+
 		first = &node;
 		last = &rightLast;
 	}

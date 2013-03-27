@@ -2,24 +2,22 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="practice" />
+		<Option title="ProjectEuler" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option virtualFolders="Sources\;" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/practice" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/ProjectEuler" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-Weffc++" />
-					<Add option="-Wextra" />
-					<Add option="-Wall" />
 					<Add option="-g" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/practice" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/ProjectEuler" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -33,22 +31,24 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="../include/BinaryTree.h" />
-		<Unit filename="../include/BinaryTreeNode.h" />
-		<Unit filename="../include/ThreadedBinaryTree.h" />
-		<Unit filename="../include/ThreadedBinaryTreeNode.h" />
-		<Unit filename="../src/BinaryTree.cpp" />
-		<Unit filename="../src/BinaryTreeNode.cpp" />
-		<Unit filename="../src/ThreadedBinaryTree.cpp" />
-		<Unit filename="../src/ThreadedBinaryTreeNode.cpp" />
-		<Unit filename="../src/main.cpp" />
+		<Unit filename="include/Problem2.h" />
+		<Unit filename="include/Problem3.h" />
+		<Unit filename="include/Problem4.h" />
+		<Unit filename="include/Problem5.h" />
+		<Unit filename="main.cpp">
+			<Option virtualFolder="Sources/" />
+		</Unit>
+		<Unit filename="src/Problem2.cpp" />
+		<Unit filename="src/Problem3.cpp" />
+		<Unit filename="src/Problem4.cpp" />
+		<Unit filename="src/Problem5.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
 			<debugger />
 			<lib_finder disable_auto="1" />
-			<editor_config active="1" use_tabs="1" tab_indents="1" tab_width="4" indent="4" eol_mode="0" />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

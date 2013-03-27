@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1364349190 source:e:\varun\github\learn\practice\projecteuler\src\problem3.cpp
+	"../include/Problem3.h"
+	"cmath"
+
+1364348198 e:\varun\github\learn\practice\projecteuler\include\problem3.h
+
+1364352464 source:e:\varun\github\learn\practice\projecteuler\main.cpp
+	<iostream>
+	"include/Problem2.h"
+	"include/Problem3.h"
+	"include/Problem4.h"
+
+1364349637 e:\varun\github\learn\practice\projecteuler\include\problem2.h
+
+1364350124 source:e:\varun\github\learn\practice\projecteuler\src\problem2.cpp
+	"../include/Problem2.h"
+	"cmath"
+
+1364353162 source:e:\varun\github\learn\practice\projecteuler\src\problem4.cpp
+	"../include/Problem4.h"
+	"cmath"
+
+1364352210 e:\varun\github\learn\practice\projecteuler\include\problem4.h
+

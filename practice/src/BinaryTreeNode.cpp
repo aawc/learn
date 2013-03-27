@@ -12,6 +12,7 @@ BinaryTreeNode::BinaryTreeNode(const BinaryTreeNode& b) : info(b.info), left(b.l
 
 BinaryTreeNode& BinaryTreeNode::operator=(const BinaryTreeNode& b)
 {
+    if (this == &b) return *this; // handle self assignment
 	this->info = b.info;
     this->left = b.left;
 	this->right = b.right;

@@ -18,6 +18,7 @@ BinaryTree::BinaryTree(const BinaryTree& b) : root(b.root)
 
 BinaryTree& BinaryTree::operator=(const BinaryTree& b)
 {
+    if (this == &b) return *this; // handle self assignment
     this->root = b.root;
     return *this;
 }
