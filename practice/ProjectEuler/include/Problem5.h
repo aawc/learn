@@ -1,5 +1,6 @@
 #ifndef PROBLEM5_H
 #define PROBLEM5_H
+#include <vector>
 
 class Problem5
 {
@@ -12,10 +13,14 @@ class Problem5
 		long long getSmallestMultiple();
 	protected:
 	private:
-		unsigned int numDigits;
-		long long largestPalindromeProduct;
-		bool isPalindrome(long long n);
-		bool isPalindrome(unsigned int digits[], unsigned int length);
+		unsigned int maxNum;
+		std::vector<unsigned int> primes;
+		std::vector<unsigned int> recurrence;
+
+		void generatePrimes();
+		void generatePrimeRecurrences();
+		long long generateProduct();
+		bool isPrime(long long n);
 };
 
 #endif // PROBLEM5_H
