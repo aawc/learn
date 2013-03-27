@@ -5,12 +5,13 @@
 
 1364348198 e:\varun\github\learn\practice\projecteuler\include\problem3.h
 
-1364380339 source:e:\varun\github\learn\practice\projecteuler\main.cpp
+1364381746 source:e:\varun\github\learn\practice\projecteuler\main.cpp
 	<iostream>
 	"include/Problem2.h"
 	"include/Problem3.h"
 	"include/Problem4.h"
 	"include/Problem5.h"
+	"include/Problem7.h"
 
 1364349637 e:\varun\github\learn\practice\projecteuler\include\problem2.h
 
@@ -29,6 +30,13 @@
 
 1364380298 source:e:\varun\github\learn\practice\projecteuler\src\problem5.cpp
 	"../include/Problem5.h"
+	<iostream>
+	<cmath>
+
+1364381559 e:\varun\github\learn\practice\projecteuler\include\problem7.h
+
+1364381651 source:e:\varun\github\learn\practice\projecteuler\src\problem7.cpp
+	"../include/Problem7.h"
 	<iostream>
 	<cmath>
 

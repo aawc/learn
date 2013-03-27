@@ -3,6 +3,7 @@
 #include "include/Problem3.h"
 #include "include/Problem4.h"
 #include "include/Problem5.h"
+#include "include/Problem7.h"
 
 using namespace std;
 
@@ -29,10 +30,17 @@ int main()
 	cout << "Answer4: " << a4 << endl;
 	*/
 
+	/*
 	const unsigned int n5 = 20;
 	Problem5* p5 = new Problem5(n5);
 	long long a5 = p5->getSmallestMultiple();
 	cout << "Answer5: " << a5 << endl;
+	*/
+
+	const unsigned int n7 = 10001;
+	Problem7* p7 = new Problem7(n7);
+	long long a7 = p7->getPrimeSeqNumber();
+	cout << "Answer7: " << a7 << endl;
 
 	return 0;
 }
