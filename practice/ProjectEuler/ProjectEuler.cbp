@@ -13,6 +13,7 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-Wall" />
 					<Add option="-g" />
 				</Compiler>
 			</Target>
@@ -33,22 +34,39 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Problem10.h" />
 		<Unit filename="include/Problem2.h" />
 		<Unit filename="include/Problem3.h" />
 		<Unit filename="include/Problem4.h" />
 		<Unit filename="include/Problem5.h" />
+		<Unit filename="include/Problem7.h" />
+		<Unit filename="include/Problem8.h" />
+		<Unit filename="include/Problem9.h" />
 		<Unit filename="main.cpp">
 			<Option virtualFolder="Sources/" />
 		</Unit>
+		<Unit filename="src/Problem10.cpp" />
 		<Unit filename="src/Problem2.cpp" />
 		<Unit filename="src/Problem3.cpp" />
 		<Unit filename="src/Problem4.cpp" />
 		<Unit filename="src/Problem5.cpp" />
+		<Unit filename="src/Problem7.cpp" />
+		<Unit filename="src/Problem8.cpp" />
+		<Unit filename="src/Problem9.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
 			<debugger />
 			<lib_finder disable_auto="1" />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

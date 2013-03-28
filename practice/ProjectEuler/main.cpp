@@ -6,6 +6,7 @@
 #include "include/Problem7.h"
 #include "include/Problem8.h"
 #include "include/Problem9.h"
+#include "include/Problem10.h"
 
 using namespace std;
 
@@ -54,9 +55,16 @@ int main()
 	cout << "Answer8: " << a8 << endl;
 	*/
 
+	/*
 	Problem9* p9 = new Problem9();
 	int a9 = p9->getSpecialPythagoreanTriplet();
 	cout << "Answer9: " << a9 << endl;
+	*/
+
+	const unsigned long n10 = 2000000;
+	Problem10* p10 = new Problem10(n10);
+	long long a10 = p10->getPrimeSum();
+	cout << "Answer10: " << a10 << endl;
 
 	return 0;
 }
