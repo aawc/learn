@@ -7,6 +7,8 @@
 #include "include/Problem8.h"
 #include "include/Problem9.h"
 #include "include/Problem10.h"
+#include "include/Problem11.h"
+#include "include/Problem12.h"
 
 using namespace std;
 
@@ -61,10 +63,23 @@ int main()
 	cout << "Answer9: " << a9 << endl;
 	*/
 
+	/*
 	const unsigned long n10 = 2000000;
 	Problem10* p10 = new Problem10(n10);
 	long long a10 = p10->getPrimeSum();
 	cout << "Answer10: " << a10 << endl;
+	*/
+
+	/*
+	Problem11* p11 = new Problem11();
+	long long a11 = p11->getLargestSubSeqProduct();
+	cout << "Answer11: " << a11 << endl;
+	*/
+
+	const unsigned long n12 = 500;
+	Problem12* p12 = new Problem12(n12);
+	long long a12 = p12->getTriangleNumberWithDivisors();
+	cout << "Answer12: " << a12 << endl;
 
 	return 0;
 }

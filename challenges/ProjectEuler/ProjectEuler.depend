@@ -66,3 +66,86 @@
 	<iostream>
 	<cmath>
 
+1364463632 source:e:\varun\github\learn\challenges\projecteuler\src\problem10.cpp
+	"../include/Problem10.h"
+	<iostream>
+	<cmath>
+
+1364463046 e:\varun\github\learn\challenges\projecteuler\include\problem10.h
+
+1364350124 source:e:\varun\github\learn\challenges\projecteuler\src\problem2.cpp
+	"../include/Problem2.h"
+	"cmath"
+
+1364349637 e:\varun\github\learn\challenges\projecteuler\include\problem2.h
+
+1364349190 source:e:\varun\github\learn\challenges\projecteuler\src\problem3.cpp
+	"../include/Problem3.h"
+	"cmath"
+
+1364348198 e:\varun\github\learn\challenges\projecteuler\include\problem3.h
+
+1364353162 source:e:\varun\github\learn\challenges\projecteuler\src\problem4.cpp
+	"../include/Problem4.h"
+	"cmath"
+
+1364352210 e:\varun\github\learn\challenges\projecteuler\include\problem4.h
+
+1364380298 source:e:\varun\github\learn\challenges\projecteuler\src\problem5.cpp
+	"../include/Problem5.h"
+	<iostream>
+	<cmath>
+
+1364380367 e:\varun\github\learn\challenges\projecteuler\include\problem5.h
+	<vector>
+
+1364381651 source:e:\varun\github\learn\challenges\projecteuler\src\problem7.cpp
+	"../include/Problem7.h"
+	<iostream>
+	<cmath>
+
+1364381559 e:\varun\github\learn\challenges\projecteuler\include\problem7.h
+
+1364449626 source:e:\varun\github\learn\challenges\projecteuler\src\problem8.cpp
+	"../include/Problem8.h"
+	<iostream>
+	<string>
+
+1364449023 e:\varun\github\learn\challenges\projecteuler\include\problem8.h
+	<string>
+
+1364450552 source:e:\varun\github\learn\challenges\projecteuler\src\problem9.cpp
+	"../include/Problem9.h"
+	<iostream>
+	<string>
+
+1364449846 e:\varun\github\learn\challenges\projecteuler\include\problem9.h
+	<string>
+
+1365149923 source:e:\varun\github\learn\challenges\projecteuler\main.cpp
+	<iostream>
+	"include/Problem2.h"
+	"include/Problem3.h"
+	"include/Problem4.h"
+	"include/Problem5.h"
+	"include/Problem7.h"
+	"include/Problem8.h"
+	"include/Problem9.h"
+	"include/Problem10.h"
+	"include/Problem11.h"
+	"include/Problem12.h"
+
+1365131663 e:\varun\github\learn\challenges\projecteuler\include\problem11.h
+
+1365148766 source:e:\varun\github\learn\challenges\projecteuler\src\problem11.cpp
+	"../include/Problem11.h"
+	<iostream>
+	<cmath>
+
+1365155061 e:\varun\github\learn\challenges\projecteuler\include\problem12.h
+
+1365155337 source:e:\varun\github\learn\challenges\projecteuler\src\problem12.cpp
+	"../include/Problem12.h"
+	<iostream>
+	<cmath>
+
