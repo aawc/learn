@@ -1,4 +1,5 @@
 #include <iostream>
+/*
 #include "include/Problem2.h"
 #include "include/Problem3.h"
 #include "include/Problem4.h"
@@ -11,6 +12,8 @@
 #include "include/Problem12.h"
 #include "include/Problem14.h"
 #include "include/Problem15.h"
+*/
+#include "include/Problem18.h"
 
 using namespace std;
 
@@ -92,12 +95,17 @@ int main()
 	cout << "Answer14: " << a14 << endl;
 	*/
 
-	unsigned long n15; // = 20;
-	cin >> n15;
+	/*
+	unsigned long n15= 20;
 	Problem15* p15 = new Problem15(n15);
 	long long a15 = p15->getLatticePaths();
 	cout << "Answer15: " << a15 << endl;
-	cin >> n15;
+	*/
+
+	unsigned long n18 = 15;
+	Problem18* p18 = new Problem18(n18);
+	long long a18 = p18->getLargestSum();
+	cout << "Answer18: " << a18 << endl;
 
 	return 0;
 }
