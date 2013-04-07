@@ -9,6 +9,8 @@
 #include "include/Problem10.h"
 #include "include/Problem11.h"
 #include "include/Problem12.h"
+#include "include/Problem14.h"
+#include "include/Problem15.h"
 
 using namespace std;
 
@@ -76,10 +78,26 @@ int main()
 	cout << "Answer11: " << a11 << endl;
 	*/
 
+	/*
 	const unsigned long n12 = 500;
 	Problem12* p12 = new Problem12(n12);
 	long long a12 = p12->getTriangleNumberWithDivisors();
 	cout << "Answer12: " << a12 << endl;
+	*/
+
+	/*
+	const unsigned long n14 = 1000000;
+	Problem14* p14 = new Problem14(n14);
+	long long a14 = p14->getLongestChainSeed();
+	cout << "Answer14: " << a14 << endl;
+	*/
+
+	unsigned long n15; // = 20;
+	cin >> n15;
+	Problem15* p15 = new Problem15(n15);
+	long long a15 = p15->getLatticePaths();
+	cout << "Answer15: " << a15 << endl;
+	cin >> n15;
 
 	return 0;
 }

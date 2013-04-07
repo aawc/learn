@@ -46,10 +46,11 @@ long long Problem12::getTriangleNumberWithDivisors()
 	while (true)
 	{
 		long long n = i*(i+1)/2;
-		cout << "i: " << i << "; n: " << n << endl;
+		//cout << "i: " << i << "; n: " << n << endl;
 		unsigned int count = this->numberOfDivisors(n);
 		if (count > maxCount)
 		{
+			cout << "n: " << n << "; count: " << count << endl;
 			maxCount = count;
 		}
 		if (count >= this->numDivisorsLimit)
@@ -63,9 +64,10 @@ long long Problem12::getTriangleNumberWithDivisors()
 
 unsigned int Problem12::numberOfDivisors(long long n)
 {
-	long long i; unsigned int count = 2;
+	long long i; unsigned int count = 0;
+	long long squareRoot = sqrt(n);
 	//cout << "; n: " << n << "; factors: 1, ";
-	for (i = 2; i <= n/2; i++)
+	for (i = 1; i <= squareRoot; i++)
 	{
 		if (n%i == 0)
 		{
@@ -73,7 +75,12 @@ unsigned int Problem12::numberOfDivisors(long long n)
 			count++;
 		}
 	}
-	//cout << n << "; count: " << count << endl;
+	count *= 2;
+	if (squareRoot * squareRoot == n)
+	{
+		count --;
+	}
+	//cout << "n: " << n << "; count: " << count << endl;
 
 	return count;
 }

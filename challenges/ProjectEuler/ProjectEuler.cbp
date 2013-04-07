@@ -35,6 +35,10 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Problem10.h" />
+		<Unit filename="include/Problem11.h" />
+		<Unit filename="include/Problem12.h" />
+		<Unit filename="include/Problem14.h" />
+		<Unit filename="include/Problem15.h" />
 		<Unit filename="include/Problem2.h" />
 		<Unit filename="include/Problem3.h" />
 		<Unit filename="include/Problem4.h" />
@@ -46,6 +50,10 @@
 			<Option virtualFolder="Sources/" />
 		</Unit>
 		<Unit filename="src/Problem10.cpp" />
+		<Unit filename="src/Problem11.cpp" />
+		<Unit filename="src/Problem12.cpp" />
+		<Unit filename="src/Problem14.cpp" />
+		<Unit filename="src/Problem15.cpp" />
 		<Unit filename="src/Problem2.cpp" />
 		<Unit filename="src/Problem3.cpp" />
 		<Unit filename="src/Problem4.cpp" />
