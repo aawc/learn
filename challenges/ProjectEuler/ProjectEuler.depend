@@ -106,7 +106,7 @@
 
 1364381559 e:\varun\github\learn\challenges\projecteuler\include\problem7.h
 
-1364449626 source:e:\varun\github\learn\challenges\projecteuler\src\problem8.cpp
+1365409536 source:e:\varun\github\learn\challenges\projecteuler\src\problem8.cpp
 	"../include/Problem8.h"
 	<iostream>
 	<string>
@@ -122,7 +122,7 @@
 1364449846 e:\varun\github\learn\challenges\projecteuler\include\problem9.h
 	<string>
 
-1365338518 source:e:\varun\github\learn\challenges\projecteuler\main.cpp
+1365413859 source:e:\varun\github\learn\challenges\projecteuler\main.cpp
 	<iostream>
 	"include/Problem2.h"
 	"include/Problem3.h"
@@ -137,10 +137,12 @@
 	"include/Problem14.h"
 	"include/Problem15.h"
 	"include/Problem18.h"
+	"include/Problem67.h"
+	"include/Problem19.h"
 
 1365131663 e:\varun\github\learn\challenges\projecteuler\include\problem11.h
 
-1365148766 source:e:\varun\github\learn\challenges\projecteuler\src\problem11.cpp
+1365409102 source:e:\varun\github\learn\challenges\projecteuler\src\problem11.cpp
 	"../include/Problem11.h"
 	<iostream>
 	<cmath>
@@ -166,10 +168,32 @@
 	"../include/Problem15.h"
 	<iostream>
 
-1365339003 source:e:\varun\github\learn\challenges\projecteuler\src\problem18.cpp
+1365339128 source:e:\varun\github\learn\challenges\projecteuler\src\problem18.cpp
 	"../include/Problem18.h"
 	<iostream>
 
 1365338368 e:\varun\github\learn\challenges\projecteuler\include\problem18.h
 	<vector>
+
+1365340705 e:\varun\github\learn\challenges\projecteuler\include\problem67.h
+	<fstream>
+	<vector>
+
+1365340874 source:e:\varun\github\learn\challenges\projecteuler\src\problem67.cpp
+	"../include/Problem67.h"
+	<iostream>
+
+1365417530 source:e:\varun\github\learn\challenges\projecteuler\src\date.cpp
+	"../include/Date.h"
+	<iostream>
+
+1365417558 e:\varun\github\learn\challenges\projecteuler\include\date.h
+
+1365413884 e:\varun\github\learn\challenges\projecteuler\include\problem19.h
+	"../include/Date.h"
+
+1365417019 source:e:\varun\github\learn\challenges\projecteuler\src\problem19.cpp
+	"../include/Problem19.h"
+	"../include/Date.h"
+	<iostream>
 

@@ -80,7 +80,7 @@ long long Problem11::getLargestSubSeqProduct()
 
 	unsigned int i, j, k;
 	long long largestProduct = 0;
-	unsigned int loci, locj, dir;
+	//unsigned int loci, locj, dir;
 	bool unassigned = true;
 	for (i = 0; i < rows; i++)
 	{
@@ -103,7 +103,7 @@ long long Problem11::getLargestSubSeqProduct()
 				if (localProduct > largestProduct || unassigned)
 				{
 					largestProduct = localProduct;
-					loci = i; locj = j; dir = 1;
+					//loci = i; locj = j; dir = 1;
 					unassigned = false;
 				}
 			}
@@ -119,7 +119,7 @@ long long Problem11::getLargestSubSeqProduct()
 				if (localProduct > largestProduct)
 				{
 					largestProduct = localProduct;
-					loci = i; locj = j; dir = 2;
+					//loci = i; locj = j; dir = 2;
 				}
 			}
 
@@ -134,7 +134,7 @@ long long Problem11::getLargestSubSeqProduct()
 				if (localProduct > largestProduct)
 				{
 					largestProduct = localProduct;
-					loci = i; locj = j; dir = 3;
+					//loci = i; locj = j; dir = 3;
 				}
 			}
 
@@ -149,7 +149,7 @@ long long Problem11::getLargestSubSeqProduct()
 				if (localProduct > largestProduct)
 				{
 					largestProduct = localProduct;
-					loci = i; locj = j; dir = 4;
+					//loci = i; locj = j; dir = 4;
 				}
 			}
 		}

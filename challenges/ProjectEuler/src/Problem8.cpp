@@ -54,7 +54,7 @@ Problem8& Problem8::operator=(const Problem8& other)
 
 int Problem8::getLargestSubProduct()
 {
-	int i = 0, j = i+lengthOfSubstring-1;
+	unsigned i = 0, j = i+lengthOfSubstring-1;
 	while(input.length() > j)
 	{
 	    //cout << "input[" << i << "]: " << input[i] << endl;

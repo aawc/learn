@@ -12,8 +12,10 @@
 #include "include/Problem12.h"
 #include "include/Problem14.h"
 #include "include/Problem15.h"
-*/
 #include "include/Problem18.h"
+#include "include/Problem67.h"
+*/
+#include "include/Problem19.h"
 
 using namespace std;
 
@@ -102,10 +104,26 @@ int main()
 	cout << "Answer15: " << a15 << endl;
 	*/
 
+	/*
 	unsigned long n18 = 15;
 	Problem18* p18 = new Problem18(n18);
 	long long a18 = p18->getLargestSum();
 	cout << "Answer18: " << a18 << endl;
+	*/
+
+	Date baseDate(1900, 1, 1, 1), d191(1901, 1, 1, baseDate), d192(2000, 12, 31, baseDate);
+	Problem19* p19 = new Problem19();
+	unsigned a19 = p19->getNumberOfSundays(d191, d192);
+	cout << "Answer19: " << a19 << endl;
+
+	/*
+	unsigned long n67 = 100;
+	std::string s67 = "E:\\Varun\\GitHub\\learn\\challenges\\ProjectEuler\\text\\Problem67.txt";
+	Problem67* p67 = new Problem67(n67, s67);
+	long long a67 = p67->getLargestSum();
+	cout << "Answer67: " << a67 << endl;
+	cin >> n67;
+	*/
 
 	return 0;
 }
