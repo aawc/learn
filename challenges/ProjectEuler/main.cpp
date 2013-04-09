@@ -13,9 +13,11 @@
 #include "include/Problem14.h"
 #include "include/Problem15.h"
 #include "include/Problem18.h"
+#include "include/Problem19.h"
+#include "include/Problem21.h"
 #include "include/Problem67.h"
 */
-#include "include/Problem19.h"
+#include "include/Problem22.h"
 
 using namespace std;
 
@@ -111,10 +113,23 @@ int main()
 	cout << "Answer18: " << a18 << endl;
 	*/
 
+	/*
 	Date baseDate(1900, 1, 1, 1), d191(1901, 1, 1, baseDate), d192(2000, 12, 31, baseDate);
 	Problem19* p19 = new Problem19();
 	unsigned a19 = p19->getNumberOfSundays(d191, d192);
 	cout << "Answer19: " << a19 << endl;
+	*/
+
+	/*
+	unsigned n21 = 10000;
+	Problem21* p21 = new Problem21(n21);
+	unsigned a21 = p21->getSumOfAmicablePairs();
+	cout << "Answer21: " << a21 << endl;
+	*/
+
+	Problem22* p22 = new Problem22();
+	unsigned long long a22 = p22->getSortedWeightedSum();
+	cout << "Answer22: " << a22 << endl;
 
 	/*
 	unsigned long n67 = 100;

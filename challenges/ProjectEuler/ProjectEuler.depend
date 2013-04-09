@@ -122,7 +122,7 @@
 1364449846 e:\varun\github\learn\challenges\projecteuler\include\problem9.h
 	<string>
 
-1365413859 source:e:\varun\github\learn\challenges\projecteuler\main.cpp
+1365504976 source:e:\varun\github\learn\challenges\projecteuler\main.cpp
 	<iostream>
 	"include/Problem2.h"
 	"include/Problem3.h"
@@ -137,8 +137,10 @@
 	"include/Problem14.h"
 	"include/Problem15.h"
 	"include/Problem18.h"
-	"include/Problem67.h"
 	"include/Problem19.h"
+	"include/Problem21.h"
+	"include/Problem67.h"
+	"include/Problem22.h"
 
 1365131663 e:\varun\github\learn\challenges\projecteuler\include\problem11.h
 
@@ -189,11 +191,21 @@
 
 1365417558 e:\varun\github\learn\challenges\projecteuler\include\date.h
 
-1365413884 e:\varun\github\learn\challenges\projecteuler\include\problem19.h
+1365418006 e:\varun\github\learn\challenges\projecteuler\include\problem19.h
 	"../include/Date.h"
 
-1365417019 source:e:\varun\github\learn\challenges\projecteuler\src\problem19.cpp
+1365417972 source:e:\varun\github\learn\challenges\projecteuler\src\problem19.cpp
 	"../include/Problem19.h"
 	"../include/Date.h"
 	<iostream>
+
+1365504882 e:\varun\github\learn\challenges\projecteuler\include\problem21.h
+
+1365504081 source:e:\varun\github\learn\challenges\projecteuler\src\problem21.cpp
+	"../include/Problem21.h"
+	<iostream>
+	<cmath>
+
+1365505425 e:\varun\github\learn\challenges\projecteuler\include\problem22.h
+	<string>
 
