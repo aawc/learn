@@ -43,6 +43,10 @@
 		<Unit filename="include/Problem18.h" />
 		<Unit filename="include/Problem19.h" />
 		<Unit filename="include/Problem2.h" />
+		<Unit filename="include/Problem21.h" />
+		<Unit filename="include/Problem22.h" />
+		<Unit filename="include/Problem23.h" />
+		<Unit filename="include/Problem24.h" />
 		<Unit filename="include/Problem3.h" />
 		<Unit filename="include/Problem4.h" />
 		<Unit filename="include/Problem5.h" />
@@ -62,6 +66,10 @@
 		<Unit filename="src/Problem18.cpp" />
 		<Unit filename="src/Problem19.cpp" />
 		<Unit filename="src/Problem2.cpp" />
+		<Unit filename="src/Problem21.cpp" />
+		<Unit filename="src/Problem22.cpp" />
+		<Unit filename="src/Problem23.cpp" />
+		<Unit filename="src/Problem24.cpp" />
 		<Unit filename="src/Problem3.cpp" />
 		<Unit filename="src/Problem4.cpp" />
 		<Unit filename="src/Problem5.cpp" />

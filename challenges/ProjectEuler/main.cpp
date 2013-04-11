@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 /*
 #include "include/Problem2.h"
 #include "include/Problem3.h"
@@ -15,9 +16,11 @@
 #include "include/Problem18.h"
 #include "include/Problem19.h"
 #include "include/Problem21.h"
+#include "include/Problem22.h"
+#include "include/Problem23.h"
 #include "include/Problem67.h"
 */
-#include "include/Problem22.h"
+#include "include/Problem24.h"
 
 using namespace std;
 
@@ -127,9 +130,30 @@ int main()
 	cout << "Answer21: " << a21 << endl;
 	*/
 
+	/*
 	Problem22* p22 = new Problem22();
 	unsigned long long a22 = p22->getSortedWeightedSum();
 	cout << "Answer22: " << a22 << endl;
+	*/
+
+	/*
+	unsigned n23 = 29000;
+	Problem23* p23 = new Problem23(n23);
+	unsigned a23 = p23->getSumOfNotSumsOfAbundantNumbers();
+	cout << "Answer23: " << a23 << endl;
+	*/
+
+	const unsigned array24[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+	std::vector<unsigned> v24 (array24, array24 + sizeof(array24) / sizeof(array24[0]));
+	Problem24* p24 = new Problem24(v24);
+	const unsigned limit24 = 1000000;
+	std::vector<unsigned> a24 = p24->getPermutationNumber(limit24);
+	cout << "Answer for limit: " << limit24 << ": ";
+	for (unsigned i = 0; i < a24.size(); i++)
+	{
+		cout << a24[i] << " ";
+	}
+	cout << endl;
 
 	/*
 	unsigned long n67 = 100;
