@@ -18,9 +18,10 @@
 #include "include/Problem21.h"
 #include "include/Problem22.h"
 #include "include/Problem23.h"
+#include "include/Problem24.h"
 #include "include/Problem67.h"
 */
-#include "include/Problem24.h"
+#include "include/Problem26.h"
 
 using namespace std;
 
@@ -143,6 +144,7 @@ int main()
 	cout << "Answer23: " << a23 << endl;
 	*/
 
+	/*
 	const unsigned array24[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 	std::vector<unsigned> v24 (array24, array24 + sizeof(array24) / sizeof(array24[0]));
 	Problem24* p24 = new Problem24(v24);
@@ -154,6 +156,12 @@ int main()
 		cout << a24[i] << " ";
 	}
 	cout << endl;
+	*/
+
+	unsigned n26 = 10;
+	Problem26* p26 = new Problem26(n26);
+	unsigned a26 = p26->getLongestRecurringCycle();
+	cout << "Answer26: " << a26 << endl;
 
 	/*
 	unsigned long n67 = 100;
