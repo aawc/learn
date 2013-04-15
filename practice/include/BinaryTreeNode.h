@@ -1,6 +1,6 @@
 class BinaryTreeNode
 {
-	protected:
+	private:
 		int info;
 		BinaryTreeNode* left;
 		BinaryTreeNode* right;

@@ -1,11 +1,9 @@
-class BinaryTreeNode;
-
 class BinaryTree
 {
 	protected:
 		BinaryTreeNode* root;
 		static bool initialized;
-		static const int MAX_ELEMENTS = 15;
+		static const int MAX_ELEMENTS = 5;
 
 	public:
 		BinaryTree(void);

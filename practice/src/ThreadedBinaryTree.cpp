@@ -1,96 +1,67 @@
 #include <iostream>
 #include <cstdlib>
+#include <time.h>
 #include "../include/ThreadedBinaryTreeNode.h"
 #include "../include/ThreadedBinaryTree.h"
 using namespace std;
 
-ThreadedBinaryTree::ThreadedBinaryTree(void) : BinaryTree()
+ThreadedBinaryTree::ThreadedBinaryTree(void) : root(NULL)
 {
+    Init();
+    this->Build();
+	this->BuildThreads();
+	this->Display();
 }
 
-ThreadedBinaryTree::ThreadedBinaryTree(const ThreadedBinaryTree& b) : BinaryTree(b)
+ThreadedBinaryTree::ThreadedBinaryTree(const ThreadedBinaryTree& b) : root(b.root)
 {
+    Init();
 }
 
 ThreadedBinaryTree& ThreadedBinaryTree::operator=(const ThreadedBinaryTree& b)
 {
     if (this == &b) return *this; // handle self assignment
-	BinaryTree::operator=(b);
+    this->root = b.root;
     return *this;
 }
 
 ThreadedBinaryTree::~ThreadedBinaryTree(void)
 {
+    this->Free(this->root);
 }
 
-void ThreadedBinaryTree::BuildThreads(void)
+void ThreadedBinaryTree::Init(void)
 {
-	ThreadedBinaryTreeNode *first, *last;
-	BuildThreadsForNode(this->root, NULL, NULL, &first, &last);
+    if (!initialized)
+    {
+        srand(time(NULL));
+        initialized = true;
+    }
 }
 
-void ThreadedBinaryTree::BuildThreadsForNode(ThreadedBinaryTreeNode* node, ThreadedBinaryTreeNode* subTreePredecessor, ThreadedBinaryTreeNode* subTreeSuccessor, ThreadedBinaryTreeNode** first, ThreadedBinaryTreeNode** last)
+void ThreadedBinaryTree::Build(void)
 {
-	ThreadedBinaryTreeNode *leftFirst, *leftLast, *rightFirst, *rightLast;
-	if (node->getLeft() != NULL && node->getRight() != NULL)
-	{
-		this->BuildThreadsForNode(node->getLeft(), subTreePredecessor, node, &leftFirst, &leftLast);
-		this->BuildThreadsForNode(node->getRight(), node, subTreeSuccessor, &rightFirst, &rightLast);
+    int numberOfElements = rand() % MAX_ELEMENTS + 1;
+    cout << "Number of elements: " << numberOfElements << endl;
+    for (int i = 0; i < numberOfElements; i++)
+    {
+        ThreadedBinaryTreeNode* node = new ThreadedBinaryTreeNode();
+        if (node == NULL)
+        {
+            cout << "Memory allocation failed!" << endl;
+            this->Free(this->root);
+            return;
+        }
+        node->setInfo(rand());
+        node->setLeft(NULL);
+        node->setRight(NULL);
+        node->setPrevious(NULL);
+        node->setNext(NULL);
 
-		//subTreePredecessor->setNext(leftFirst);
-		//subTreeSuccessor->setPrevious(rightLast);
-		node->setPrevious(leftLast);
-		node->setNext(rightFirst);
-
-		leftLast->setNext(node);
-		rightFirst->setPrevious(node);
-
-		first = &leftFirst;
-		last = &rightLast;
-	}
-	else if (node->getLeft() == NULL && node->getRight() == NULL)
-	{
-		//subTreePredecessor->setNext(node);
-		//subTreeSuccessor->setPrevious(node);
-		node->setPrevious(subTreePredecessor);
-		node->setNext(subTreeSuccessor);
-
-		first = &node;
-		last = &node;
-	}
-	else if (node->getLeft() != NULL)
-	{
-		this->BuildThreadsForNode(node->getLeft(), subTreePredecessor, node, &leftFirst, &leftLast);
-
-		//subTreePredecessor->setNext(leftFirst);
-		//subTreeSuccessor->setPrevious(node);
-		node->setPrevious(leftLast);
-		node->setNext(subTreeSuccessor);
-
-		leftLast->setNext(node);
-		subTreeSuccessor->setPrevious(node);
-
-		first = &leftFirst;
-		last = &node;
-	}
-	else
-	{
-		this->BuildThreadsForNode(node->getRight(), node, subTreeSuccessor, &rightFirst, &rightLast);
-
-		//subTreePredecessor->setNext(leftFirst);
-		//subTreeSuccessor->setPrevious(node);
-		node->setPrevious(subTreePredecessor);
-		node->setNext(rightFirst);
-
-		rightFirst->setPrevious(node);
-		subTreePredecessor->setNext(node);
-
-		first = &node;
-		last = &rightLast;
-	}
+        this->InsertNode(node);
+    }
 }
 
-/*
 ThreadedBinaryTreeNode* ThreadedBinaryTree::FindPreOrderParent(int info, ThreadedBinaryTreeNode* node)
 {
     if (node == NULL)
@@ -121,7 +92,14 @@ void ThreadedBinaryTree::DisplayPreOrder(ThreadedBinaryTreeNode* node)
     {
         return;
     }
-    cout << node->getInfo() << endl;
+
+    ThreadedBinaryTreeNode* previous = node->getPrevious();
+    ThreadedBinaryTreeNode* next = node->getNext();
+    cout << node->getInfo();
+    cout << " | Previous: " << (previous == NULL? -1 : previous->getInfo());
+    cout << " | Next: " << (next == NULL? -1 : next->getInfo());
+    cout << endl;
+
     this->DisplayPreOrder(node->getLeft());
     this->DisplayPreOrder(node->getRight());
 }
@@ -136,8 +114,16 @@ void ThreadedBinaryTree::DisplayInOrder(ThreadedBinaryTreeNode* node)
     {
         return;
     }
+
     this->DisplayInOrder(node->getLeft());
-    cout << node->getInfo() << endl;
+
+    ThreadedBinaryTreeNode* previous = node->getPrevious();
+    ThreadedBinaryTreeNode* next = node->getNext();
+    cout << node->getInfo();
+    cout << " | Previous: " << (previous == NULL? -1 : previous->getInfo());
+    cout << " | Next: " << (next == NULL? -1 : next->getInfo());
+    cout << endl;
+
     this->DisplayInOrder(node->getRight());
 }
 
@@ -153,7 +139,13 @@ void ThreadedBinaryTree::DisplayPostOrder(ThreadedBinaryTreeNode* node)
     }
     this->DisplayPostOrder(node->getLeft());
     this->DisplayPostOrder(node->getRight());
-    cout << node->getInfo() << endl;
+
+    ThreadedBinaryTreeNode* previous = node->getPrevious();
+    ThreadedBinaryTreeNode* next = node->getNext();
+    cout << node->getInfo();
+    cout << " | Previous: " << (previous == NULL? -1 : previous->getInfo());
+    cout << " | Next: " << (next == NULL? -1 : next->getInfo());
+    cout << endl;
 }
 
 void ThreadedBinaryTree::InsertNode(ThreadedBinaryTreeNode* parent, ThreadedBinaryTreeNode* node)
@@ -213,6 +205,77 @@ void ThreadedBinaryTree::Free(ThreadedBinaryTreeNode* node)
         node = NULL;
     }
 }
+
+void ThreadedBinaryTree::BuildThreads(void)
+{
+	ThreadedBinaryTreeNode *first, *last;
+	ThreadedBinaryTree::BuildThreadsForNode(this->root, NULL, NULL, &first, &last);
+}
+
+void ThreadedBinaryTree::BuildThreadsForNode(
+		ThreadedBinaryTreeNode* node,
+		ThreadedBinaryTreeNode* subTreePredecessor,
+		ThreadedBinaryTreeNode* subTreeSuccessor,
+		ThreadedBinaryTreeNode** first,
+		ThreadedBinaryTreeNode** last)
+{
+	ThreadedBinaryTreeNode *leftFirst, *leftLast, *rightFirst, *rightLast;
+	ThreadedBinaryTreeNode* left = node->getLeft();
+	ThreadedBinaryTreeNode* right = node->getRight();
+
+	if (left != NULL && right != NULL)
+	{
+		ThreadedBinaryTree::BuildThreadsForNode(left, subTreePredecessor, node, &leftFirst, &leftLast);
+		ThreadedBinaryTree::BuildThreadsForNode(right, node, subTreeSuccessor, &rightFirst, &rightLast);
+
+		node->setPrevious(leftLast);
+		node->setNext(rightFirst);
+
+		leftLast->setNext(node);
+		rightFirst->setPrevious(node);
+
+		*first = leftFirst;
+		*last = rightLast;
+	}
+	else if (left == NULL && right == NULL)
+	{
+		node->setPrevious(subTreePredecessor);
+		node->setNext(subTreeSuccessor);
+
+		*first = node;
+		*last = node;
+	}
+	else if (left != NULL)
+	{
+		ThreadedBinaryTree::BuildThreadsForNode(left, subTreePredecessor, node, &leftFirst, &leftLast);
+
+		node->setPrevious(leftLast);
+		node->setNext(subTreeSuccessor);
+
+		leftLast->setNext(node);
+
+		*first = leftFirst;
+		*last = node;
+	}
+	else
+	{
+		ThreadedBinaryTree::BuildThreadsForNode(right, node, subTreeSuccessor, &rightFirst, &rightLast);
+
+		node->setPrevious(subTreePredecessor);
+		node->setNext(rightFirst);
+
+		rightFirst->setPrevious(node);
+
+		*first = node;
+		*last = rightLast;
+	}
+}
+
+void ThreadedBinaryTree::Display(void)
+{
+    this->DisplayPreOrder(this->root);
+    this->DisplayInOrder(this->root);
+    this->DisplayPostOrder(this->root);
+}
+
 bool ThreadedBinaryTree::initialized;
-const int ThreadedBinaryTree::MAX_ELEMENTS;
-*/

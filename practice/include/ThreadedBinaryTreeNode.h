@@ -1,7 +1,18 @@
-#include "BinaryTreeNode.h"
-
-class ThreadedBinaryTreeNode : BinaryTreeNode
+class ThreadedBinaryTreeNode
 {
+	private:
+		int info;
+		ThreadedBinaryTreeNode* left;
+		ThreadedBinaryTreeNode* right;
+
+	public:
+		int getInfo();
+		ThreadedBinaryTreeNode* getLeft();
+		ThreadedBinaryTreeNode* getRight();
+		void setInfo(int);
+		void setLeft(ThreadedBinaryTreeNode*);
+		void setRight(ThreadedBinaryTreeNode*);
+
 	private:
 		// The pointers to previous and next nodes in-order.
 		ThreadedBinaryTreeNode* previous;

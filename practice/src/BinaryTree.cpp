@@ -184,5 +184,6 @@ void BinaryTree::Free(BinaryTreeNode* node)
         node = NULL;
     }
 }
+
 bool BinaryTree::initialized;
 const int BinaryTree::MAX_ELEMENTS;
