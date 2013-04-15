@@ -6,12 +6,11 @@
 	"../include/BinaryTreeNode.h"
 	"../include/BinaryTree.h"
 
-1365995714 e:\varun\github\learn\practice\include\binarytree.h
+1366000414 e:\varun\github\learn\practice\include\binarytree.h
 
-1365995759 source:e:\varun\github\learn\practice\src\main.cpp
+1366000379 source:e:\varun\github\learn\practice\src\main.cpp
 	<cstdlib>
-	"../include/ThreadedBinaryTreeNode.h"
-	"../include/ThreadedBinaryTree.h"
+	"../include/BinaryTree.h"
 
 1365995941 e:\varun\github\learn\practice\include\binarytreenode.h
 
