@@ -8,9 +8,10 @@
 
 1366000414 e:\varun\github\learn\practice\include\binarytree.h
 
-1366000379 source:e:\varun\github\learn\practice\src\main.cpp
+1366002815 source:e:\varun\github\learn\practice\src\main.cpp
 	<cstdlib>
-	"../include/BinaryTree.h"
+	"../include/MergeSort.h"
+	"../include/MergeSortSTL.h"
 
 1365995941 e:\varun\github\learn\practice\include\binarytreenode.h
 
@@ -32,4 +33,23 @@
 	<time.h>
 	"../include/ThreadedBinaryTreeNode.h"
 	"../include/ThreadedBinaryTree.h"
+
+1366002264 source:e:\varun\github\learn\practice\src\mergesort.cpp
+	<iostream>
+	<cstdlib>
+	<time.h>
+	"../include/MergeSort.h"
+
+1366002833 e:\varun\github\learn\practice\include\mergesort.h
+	<string>
+
+1366002403 source:e:\varun\github\learn\practice\src\mergesortstl.cpp
+	<iostream>
+	<cstdlib>
+	<time.h>
+	"../include/MergeSortSTL.h"
+
+1366002477 e:\varun\github\learn\practice\include\mergesortstl.h
+	<string>
+	<vector>
 
