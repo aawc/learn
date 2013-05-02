@@ -36,10 +36,14 @@
 		</Compiler>
 		<Unit filename="../include/BinaryTree.h" />
 		<Unit filename="../include/BinaryTreeNode.h" />
+		<Unit filename="../include/MergeSort.h" />
+		<Unit filename="../include/MergeSortSTL.h" />
 		<Unit filename="../include/ThreadedBinaryTree.h" />
 		<Unit filename="../include/ThreadedBinaryTreeNode.h" />
 		<Unit filename="../src/BinaryTree.cpp" />
 		<Unit filename="../src/BinaryTreeNode.cpp" />
+		<Unit filename="../src/MergeSort.cpp" />
+		<Unit filename="../src/MergeSortSTL.cpp" />
 		<Unit filename="../src/ThreadedBinaryTree.cpp" />
 		<Unit filename="../src/ThreadedBinaryTreeNode.cpp" />
 		<Unit filename="../src/main.cpp" />
