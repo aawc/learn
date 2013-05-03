@@ -4,9 +4,14 @@
 //#include "../include/MergeSort.h"
 //#include "../include/MergeSortSTL.h"
 //#include "../include/InsertSort.h"
-#include "../include/InsertSortSTL.h"
-
+//#include "../include/InsertSortSTL.h"
+#include "../include/QuickSortSTL.h"
 using namespace std;
+
+int randomNumberGenerator()
+{
+	return rand();
+}
 
 int main (int, char**)
 {
@@ -14,6 +19,7 @@ int main (int, char**)
 	BinaryTree *binaryTree = new BinaryTree();
 	delete binaryTree; binaryTree = NULL;
 	*/
+
 	/*
 	ThreadedBinaryTree *threadedBinaryTree = new ThreadedBinaryTree();
 	delete threadedBinaryTree; threadedBinaryTree = NULL;
@@ -37,9 +43,15 @@ int main (int, char**)
 	delete insertSort; insertSort = NULL;
 	*/
 
+	/*
 	const unsigned MAX_ELEMENTS = 10;
 	InsertSortSTL* insertSortSTL = new InsertSortSTL(MAX_ELEMENTS);
 	delete insertSortSTL; insertSortSTL = NULL;
+	*/
+
+	const unsigned MAX_ELEMENTS = 10;
+	QuickSortSTL<int> *quickSortSTL = new QuickSortSTL<int>(MAX_ELEMENTS, randomNumberGenerator);
+	delete quickSortSTL; quickSortSTL = NULL;
 
 	return 0;
 }
