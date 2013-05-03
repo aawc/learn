@@ -5,7 +5,8 @@
 //#include "../include/MergeSortSTL.h"
 //#include "../include/InsertSort.h"
 //#include "../include/InsertSortSTL.h"
-#include "../include/QuickSortSTL.h"
+//#include "../include/QuickSortSTL.h"
+#include "../include/LinkedListLoop.h"
 using namespace std;
 
 int randomNumberGenerator()
@@ -49,9 +50,14 @@ int main (int, char**)
 	delete insertSortSTL; insertSortSTL = NULL;
 	*/
 
+	/*
 	const unsigned MAX_ELEMENTS = 10;
 	QuickSortSTL<int> *quickSortSTL = new QuickSortSTL<int>(MAX_ELEMENTS, randomNumberGenerator);
 	delete quickSortSTL; quickSortSTL = NULL;
+	*/
+
+	LinkedListLoop *linkedListLoop = new LinkedListLoop();
+	delete linkedListLoop; linkedListLoop = NULL;
 
 	return 0;
 }
