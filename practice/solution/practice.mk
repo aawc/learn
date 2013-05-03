@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=varunkh
-Date                   :=5/2/2013
+Date                   :=5/3/2013
 CodeLitePath           :="C:\Program Files (x86)\CodeLite"
 LinkerName             :=g++
 SharedObjectLinkerName :=g++ -shared -fPIC
@@ -61,7 +61,8 @@ CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ##
 CodeLiteDir:=C:\Program Files (x86)\CodeLite
 UNIT_TEST_PP_SRC_DIR:=C:\Program Files (x86)\CodeLite\UnitTest++-1.3
-Objects0=$(IntermediateDirectory)/src_BinaryTree$(ObjectSuffix) $(IntermediateDirectory)/src_BinaryTreeNode$(ObjectSuffix) $(IntermediateDirectory)/src_InsertSort$(ObjectSuffix) $(IntermediateDirectory)/src_InsertSortSTL$(ObjectSuffix) $(IntermediateDirectory)/src_main$(ObjectSuffix) $(IntermediateDirectory)/src_MergeSort$(ObjectSuffix) $(IntermediateDirectory)/src_MergeSortSTL$(ObjectSuffix) $(IntermediateDirectory)/src_ThreadedBinaryTree$(ObjectSuffix) $(IntermediateDirectory)/src_ThreadedBinaryTreeNode$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/src_BinaryTree$(ObjectSuffix) $(IntermediateDirectory)/src_BinaryTreeNode$(ObjectSuffix) $(IntermediateDirectory)/src_InsertSort$(ObjectSuffix) $(IntermediateDirectory)/src_InsertSortSTL$(ObjectSuffix) $(IntermediateDirectory)/src_LinkedListLoop$(ObjectSuffix) $(IntermediateDirectory)/src_main$(ObjectSuffix) $(IntermediateDirectory)/src_MergeSort$(ObjectSuffix) $(IntermediateDirectory)/src_MergeSortSTL$(ObjectSuffix) $(IntermediateDirectory)/src_QuickSortSTL$(ObjectSuffix) $(IntermediateDirectory)/src_ThreadedBinaryTree$(ObjectSuffix) \
+	$(IntermediateDirectory)/src_ThreadedBinaryTreeNode$(ObjectSuffix) $(IntermediateDirectory)/src_LinkedList$(ObjectSuffix) 
 
 
 
@@ -120,6 +121,14 @@ $(IntermediateDirectory)/src_InsertSortSTL$(DependSuffix): ../src/InsertSortSTL.
 $(IntermediateDirectory)/src_InsertSortSTL$(PreprocessSuffix): ../src/InsertSortSTL.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_InsertSortSTL$(PreprocessSuffix) "../src/InsertSortSTL.cpp"
 
+$(IntermediateDirectory)/src_LinkedListLoop$(ObjectSuffix): ../src/LinkedListLoop.cpp $(IntermediateDirectory)/src_LinkedListLoop$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "E:/Varun/GitHub/learn/practice/src/LinkedListLoop.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_LinkedListLoop$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_LinkedListLoop$(DependSuffix): ../src/LinkedListLoop.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_LinkedListLoop$(ObjectSuffix) -MF$(IntermediateDirectory)/src_LinkedListLoop$(DependSuffix) -MM "../src/LinkedListLoop.cpp"
+
+$(IntermediateDirectory)/src_LinkedListLoop$(PreprocessSuffix): ../src/LinkedListLoop.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_LinkedListLoop$(PreprocessSuffix) "../src/LinkedListLoop.cpp"
+
 $(IntermediateDirectory)/src_main$(ObjectSuffix): ../src/main.cpp $(IntermediateDirectory)/src_main$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "E:/Varun/GitHub/learn/practice/src/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_main$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/src_main$(DependSuffix): ../src/main.cpp
@@ -144,6 +153,14 @@ $(IntermediateDirectory)/src_MergeSortSTL$(DependSuffix): ../src/MergeSortSTL.cp
 $(IntermediateDirectory)/src_MergeSortSTL$(PreprocessSuffix): ../src/MergeSortSTL.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_MergeSortSTL$(PreprocessSuffix) "../src/MergeSortSTL.cpp"
 
+$(IntermediateDirectory)/src_QuickSortSTL$(ObjectSuffix): ../src/QuickSortSTL.cpp $(IntermediateDirectory)/src_QuickSortSTL$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "E:/Varun/GitHub/learn/practice/src/QuickSortSTL.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_QuickSortSTL$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_QuickSortSTL$(DependSuffix): ../src/QuickSortSTL.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_QuickSortSTL$(ObjectSuffix) -MF$(IntermediateDirectory)/src_QuickSortSTL$(DependSuffix) -MM "../src/QuickSortSTL.cpp"
+
+$(IntermediateDirectory)/src_QuickSortSTL$(PreprocessSuffix): ../src/QuickSortSTL.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_QuickSortSTL$(PreprocessSuffix) "../src/QuickSortSTL.cpp"
+
 $(IntermediateDirectory)/src_ThreadedBinaryTree$(ObjectSuffix): ../src/ThreadedBinaryTree.cpp $(IntermediateDirectory)/src_ThreadedBinaryTree$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "E:/Varun/GitHub/learn/practice/src/ThreadedBinaryTree.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_ThreadedBinaryTree$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/src_ThreadedBinaryTree$(DependSuffix): ../src/ThreadedBinaryTree.cpp
@@ -159,6 +176,14 @@ $(IntermediateDirectory)/src_ThreadedBinaryTreeNode$(DependSuffix): ../src/Threa
 
 $(IntermediateDirectory)/src_ThreadedBinaryTreeNode$(PreprocessSuffix): ../src/ThreadedBinaryTreeNode.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_ThreadedBinaryTreeNode$(PreprocessSuffix) "../src/ThreadedBinaryTreeNode.cpp"
+
+$(IntermediateDirectory)/src_LinkedList$(ObjectSuffix): ../src/LinkedList.cpp $(IntermediateDirectory)/src_LinkedList$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "E:/Varun/GitHub/learn/practice/src/LinkedList.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_LinkedList$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_LinkedList$(DependSuffix): ../src/LinkedList.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_LinkedList$(ObjectSuffix) -MF$(IntermediateDirectory)/src_LinkedList$(DependSuffix) -MM "../src/LinkedList.cpp"
+
+$(IntermediateDirectory)/src_LinkedList$(PreprocessSuffix): ../src/LinkedList.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_LinkedList$(PreprocessSuffix) "../src/LinkedList.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
@@ -178,6 +203,9 @@ clean:
 	$(RM) $(IntermediateDirectory)/src_InsertSortSTL$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/src_InsertSortSTL$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/src_InsertSortSTL$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/src_LinkedListLoop$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/src_LinkedListLoop$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/src_LinkedListLoop$(PreprocessSuffix)
 	$(RM) $(IntermediateDirectory)/src_main$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/src_main$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/src_main$(PreprocessSuffix)
@@ -187,12 +215,18 @@ clean:
 	$(RM) $(IntermediateDirectory)/src_MergeSortSTL$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/src_MergeSortSTL$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/src_MergeSortSTL$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/src_QuickSortSTL$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/src_QuickSortSTL$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/src_QuickSortSTL$(PreprocessSuffix)
 	$(RM) $(IntermediateDirectory)/src_ThreadedBinaryTree$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/src_ThreadedBinaryTree$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/src_ThreadedBinaryTree$(PreprocessSuffix)
 	$(RM) $(IntermediateDirectory)/src_ThreadedBinaryTreeNode$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/src_ThreadedBinaryTreeNode$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/src_ThreadedBinaryTreeNode$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/src_LinkedList$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/src_LinkedList$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/src_LinkedList$(PreprocessSuffix)
 	$(RM) $(OutputFile)
 	$(RM) $(OutputFile).exe
 	$(RM) ".build-debug/practice"

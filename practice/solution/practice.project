@@ -12,13 +12,14 @@
     <File Name="../src/BinaryTreeNode.cpp"/>
     <File Name="../src/InsertSort.cpp" Flags="0"/>
     <File Name="../src/InsertSortSTL.cpp" Flags="0"/>
-    <File Name="../src/LinkedListLoop.cpp" Flags="1"/>
+    <File Name="../src/LinkedListLoop.cpp" Flags="0"/>
     <File Name="../src/main.cpp"/>
     <File Name="../src/MergeSort.cpp"/>
     <File Name="../src/MergeSortSTL.cpp"/>
-    <File Name="../src/QuickSortSTL.cpp" Flags="1"/>
+    <File Name="../src/QuickSortSTL.cpp" Flags="0"/>
     <File Name="../src/ThreadedBinaryTree.cpp"/>
     <File Name="../src/ThreadedBinaryTreeNode.cpp"/>
+    <File Name="../src/LinkedList.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="../include/BinaryTree.h"/>
@@ -28,6 +29,11 @@
     <File Name="../include/ThreadedBinaryTree.h"/>
     <File Name="../include/ThreadedBinaryTreeNode.h"/>
     <File Name="../include/InsertSort.h"/>
+    <File Name="../include/InsertSortSTL.h"/>
+    <File Name="../include/LinkedList.h"/>
+    <File Name="../include/LinkedListLoop.h"/>
+    <File Name="../include/LinkedListNode.h"/>
+    <File Name="../include/QuickSortSTL.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
