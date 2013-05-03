@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="practice" Database="./practice.tags">
-  <Project Name="practice" Path="practice.project" Active="Yes"/>
+  <Project Name="practice" Path="practice.project" Active="No"/>
+  <Project Name="quora" Path="../../challenges/quora/solution/quora.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Project Name="practice" ConfigName="Debug"/>
+      <Project Name="quora" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Project Name="practice" ConfigName="Release"/>
+      <Project Name="quora" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
