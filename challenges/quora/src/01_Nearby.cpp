@@ -27,6 +27,19 @@ Sample Input:
 11 t 2 0.0 0.0
 12 q 5 100.0 100.0
 
+ 3 6 2
+ 0 0.0 0.0
+ 1 1.0 1.0
+ 2 2.0 2.0
+ 0 1 0
+ 1 2 0 1
+ 2 3 0 1 2
+ 3 0
+ 4 0
+ 5 2 1 2
+ t 2 0.0 0.0
+ q 5 100.0 100.0
+
 Output format (write to STDOUT):
 For each query line given in the input, you are to output the ids of the nearest entities in ascending order of distance
 from the query location, up to the specified number of results.
@@ -62,15 +75,30 @@ For the large testcases, all topic x,y co-ordinates will be approximately unifor
 You should aim to have your algorithm be fast enough to solve our largest test inputs in under 5 seconds, or be as close to that as possible.
 */
 
+#include <algorithm>
 #include <cmath>
+#include <iostream>
 #include <vector>
 using namespace std;
 
-class Location
+class IDObject
 {
 public:
-	unsigned long x;
-	unsigned long y;
+	virtual ~IDObject() {}
+	virtual unsigned GetID() = 0;
+};
+
+class Location
+{
+private:
+	Location(void);
+
+public:
+	double x;
+	double y;
+
+	Location(double x, double y) : x(x), y(y)
+	{}
 
 	bool operator== (const Location &other)
 	{
@@ -81,16 +109,22 @@ public:
 		return !(*this == other);
 	}
 
-	unsigned long distanceFrom (const Location& other)
+	double distanceFrom (const Location& other)
 	{
 		return sqrt( (this->x - other.x)*(this->x - other.x) + (this->y - other.y)*(this->y - other.y) );
 	}
 };
 
-struct Topic
+class Topic : public IDObject
 {
+public:
 	unsigned id;
 	Location location;
+
+	Topic(unsigned id, double x, double y) : id(id), location(x, y)
+	{}
+	~Topic()
+	{}
 
 	bool operator== (const Topic &other)
 	{
@@ -100,36 +134,77 @@ struct Topic
 	{
 		return !(*this == other);
 	}
+
+	unsigned GetID()
+	{
+		return this->id;
+	}
 };
 
-class Question
+class Question : public IDObject
 {
 public:
 	unsigned id;
-	vector<Topic> topics;
-};
+	vector<Topic*> topics;
 
-enum QueryType
-{
-	t,
-	q
+	Question(unsigned id) : id(id)
+	{}
+	~Question()
+	{}
+
+	unsigned GetID()
+	{
+		return this->id;
+	}
 };
 
 class Query
 {
 public:
-	QueryType type;
+	char type;
 	unsigned numberOfResults;
-	Location baseLocation;
+	Location *location;
+
+	Query(char type, unsigned numberOfResults, Location* location) : type(type), numberOfResults(numberOfResults), location(location)
+	{}
+
+	~Query()
+	{
+		delete this->location;
+	}
+};
+
+struct IDObjectAndDistance
+{
+	IDObject *object;
+	double distance;
+
+	static inline bool comparer(const IDObjectAndDistance* a, const IDObjectAndDistance* b)
+	{
+		if(a->distance == b->distance)
+			return a->object->GetID() < b->object->GetID();
+
+		return a->distance < b->distance;
+	}
 };
 
 class ProblemNearby
 {
 private:
 	unsigned tn, qn, nn;
-	vector<Topic> topics;
-	vector<Question> questions;
-	vector<Query> queries;
+	vector<Topic*> topics;
+	vector<Question*> questions;
+	vector<Query*> queries;
+
+	Topic* getTopicWithId(unsigned topicId)
+	{
+		for (unsigned i = 0; i < topics.size(); i++)
+		{
+			if (this->topics[i]->id == topicId)
+				return topics[i];
+		}
+		return NULL;
+	}
 
 public:
 	ProblemNearby()
@@ -140,8 +215,97 @@ public:
 
 		for (unsigned i = 0; i < tn; i++)
 		{
-			Topic* topic = new Topic;
-			topic->
+			unsigned id;
+			double x, y;
+			cin >> id;
+			cin >> x;
+			cin >> y;
+
+			this->topics.push_back(new Topic(id, x, y));
+		}
+
+		for (unsigned i = 0; i < qn; i++)
+		{
+			unsigned id;
+			unsigned numTopics, topicId;
+			cin >> id;
+			cin >> numTopics;
+
+			if (numTopics > 0)
+			{
+				Question *question = new Question(id);
+				for (unsigned j = 0; j < numTopics; j++)
+				{
+					cin >> topicId;
+					question->topics.push_back(this->getTopicWithId(topicId));
+				}
+				this->questions.push_back(question);
+			}
+		}
+
+		for (unsigned i = 0; i < nn; i++)
+		{
+			char ctype;
+			unsigned numberOfResults;
+			double x, y;
+			cin >> ctype;
+			cin >> numberOfResults;
+			cin >> x >> y;
+			Location *queryLocation = new Location(x, y);
+
+			this->queries.push_back(new Query(ctype, numberOfResults, queryLocation));
+		}
+
+		for (unsigned i = 0; i < nn; i++)
+		{
+			Query* query = this->queries[i];
+
+			if (query->type == 't' && this->topics.size() != 0)
+			{
+				vector<IDObjectAndDistance*> topicsAndDistances;
+				for (unsigned j = 0; j < this->topics.size(); j++)
+				{
+					IDObjectAndDistance* topicAndDistance = new IDObjectAndDistance;
+					topicAndDistance->distance = query->location->distanceFrom(this->topics[j]->location);
+					topicAndDistance->object = this->topics[j];
+
+					topicsAndDistances.push_back(topicAndDistance);
+				}
+
+				std::sort(topicsAndDistances.begin(), topicsAndDistances.end(), IDObjectAndDistance::comparer);
+
+				unsigned numberOfResults = query->numberOfResults > topicsAndDistances.size() ? topicsAndDistances.size() : query->numberOfResults;
+				for (unsigned j = 0; j < numberOfResults; j++)
+				{
+					cout << topicsAndDistances[j]->object->GetID() << " ";
+				}
+
+				for (unsigned j = 0; j < topicsAndDistances.size(); j++)
+				{
+					delete topicsAndDistances[j];
+				}
+			}
+			else if (this->questions.size() != 0)
+			{
+			}
+		}
+	}
+
+	~ProblemNearby()
+	{
+		for (unsigned i = 0; i < this->queries.size(); i++)
+		{
+			delete this->queries[i];
+		}
+
+		for (unsigned i = 0; i < this->questions.size(); i++)
+		{
+			delete this->questions[i];
+		}
+
+		for (unsigned i = 0; i < this->topics.size(); i++)
+		{
+			delete this->topics[i];
 		}
 	}
 };
