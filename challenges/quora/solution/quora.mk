@@ -61,7 +61,7 @@ CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ##
 CodeLiteDir:=D:\Program Files (x86)\CodeLite
 UNIT_TEST_PP_SRC_DIR:=D:\UnitTest++-1.3
-Objects0=$(IntermediateDirectory)/src_main$(ObjectSuffix) $(IntermediateDirectory)/src_01_Nearby$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/src_main$(ObjectSuffix) $(IntermediateDirectory)/src_01_Nearby$(ObjectSuffix) $(IntermediateDirectory)/src_02_TypeAhead$(ObjectSuffix) 
 
 
 
@@ -104,6 +104,14 @@ $(IntermediateDirectory)/src_01_Nearby$(DependSuffix): ../src/01_Nearby.cpp
 $(IntermediateDirectory)/src_01_Nearby$(PreprocessSuffix): ../src/01_Nearby.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_01_Nearby$(PreprocessSuffix) "../src/01_Nearby.cpp"
 
+$(IntermediateDirectory)/src_02_TypeAhead$(ObjectSuffix): ../src/02_TypeAhead.cpp $(IntermediateDirectory)/src_02_TypeAhead$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "E:/Varun/GitHub/learn/challenges/quora/src/02_TypeAhead.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_02_TypeAhead$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_02_TypeAhead$(DependSuffix): ../src/02_TypeAhead.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_02_TypeAhead$(ObjectSuffix) -MF$(IntermediateDirectory)/src_02_TypeAhead$(DependSuffix) -MM "../src/02_TypeAhead.cpp"
+
+$(IntermediateDirectory)/src_02_TypeAhead$(PreprocessSuffix): ../src/02_TypeAhead.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_02_TypeAhead$(PreprocessSuffix) "../src/02_TypeAhead.cpp"
+
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
 ##
@@ -116,6 +124,9 @@ clean:
 	$(RM) $(IntermediateDirectory)/src_01_Nearby$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/src_01_Nearby$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/src_01_Nearby$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/src_02_TypeAhead$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/src_02_TypeAhead$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/src_02_TypeAhead$(PreprocessSuffix)
 	$(RM) $(OutputFile)
 	$(RM) $(OutputFile).exe
 	$(RM) "../../../practice/solution/.build-debug/quora"

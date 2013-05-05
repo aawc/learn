@@ -6,18 +6,24 @@
     <TabInfo>
       <wxString Value="E:\Varun\GitHub\learn\challenges\quora\src\main.cpp" Name="FileName"/>
       <int Value="0" Name="FirstVisibleLine"/>
-      <int Value="1" Name="CurrentLine"/>
+      <int Value="8" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
     </TabInfo>
     <TabInfo>
       <wxString Value="E:\Varun\GitHub\learn\challenges\quora\src\01_Nearby.cpp" Name="FileName"/>
-      <int Value="110" Name="FirstVisibleLine"/>
-      <int Value="127" Name="CurrentLine"/>
+      <int Value="312" Name="FirstVisibleLine"/>
+      <int Value="376" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="E:\Varun\GitHub\learn\challenges\quora\src\02_TypeAhead.cpp" Name="FileName"/>
+      <int Value="208" Name="FirstVisibleLine"/>
+      <int Value="322" Name="CurrentLine"/>
       <wxArrayString Name="Bookmarks"/>
     </TabInfo>
   </TabInfoArray>
   <SerializedObject Name="m_breakpoints">
-    <long Value="9" Name="Count"/>
+    <long Value="3" Name="Count"/>
     <SerializedObject Name="Breakpoint0">
       <wxString Value="E:\GitHub\learn\challenges\quora\src\01_Nearby.cpp" Name="file"/>
       <int Value="117" Name="lineno"/>
@@ -32,7 +38,7 @@
       <bool Value="1" Name="is_enabled"/>
       <int Value="0" Name="ignore_number"/>
       <wxString Value="" Name="conditions"/>
-      <int Value="1" Name="origin"/>
+      <int Value="0" Name="origin"/>
     </SerializedObject>
     <SerializedObject Name="Breakpoint1">
       <wxString Value="E:\GitHub\learn\challenges\quora\src\01_Nearby.cpp" Name="file"/>
@@ -48,107 +54,11 @@
       <bool Value="1" Name="is_enabled"/>
       <int Value="0" Name="ignore_number"/>
       <wxString Value="" Name="conditions"/>
-      <int Value="1" Name="origin"/>
+      <int Value="0" Name="origin"/>
     </SerializedObject>
     <SerializedObject Name="Breakpoint2">
       <wxString Value="E:\Varun\GitHub\learn\challenges\quora\src\01_Nearby.cpp" Name="file"/>
       <int Value="144" Name="lineno"/>
-      <wxString Value="" Name="function_name"/>
-      <wxString Value="" Name="memory_address"/>
-      <int Value="1" Name="bp_type"/>
-      <int Value="0" Name="watchpoint_type"/>
-      <wxString Value="" Name="watchpt_data"/>
-      <CData Name="commandlist"/>
-      <bool Value="0" Name="regex"/>
-      <bool Value="0" Name="is_temp"/>
-      <bool Value="1" Name="is_enabled"/>
-      <int Value="0" Name="ignore_number"/>
-      <wxString Value="" Name="conditions"/>
-      <int Value="0" Name="origin"/>
-    </SerializedObject>
-    <SerializedObject Name="Breakpoint3">
-      <wxString Value="E:\Varun\GitHub\learn\challenges\quora\src\01_Nearby.cpp" Name="file"/>
-      <int Value="272" Name="lineno"/>
-      <wxString Value="" Name="function_name"/>
-      <wxString Value="" Name="memory_address"/>
-      <int Value="1" Name="bp_type"/>
-      <int Value="0" Name="watchpoint_type"/>
-      <wxString Value="" Name="watchpt_data"/>
-      <CData Name="commandlist"/>
-      <bool Value="0" Name="regex"/>
-      <bool Value="0" Name="is_temp"/>
-      <bool Value="1" Name="is_enabled"/>
-      <int Value="0" Name="ignore_number"/>
-      <wxString Value="" Name="conditions"/>
-      <int Value="0" Name="origin"/>
-    </SerializedObject>
-    <SerializedObject Name="Breakpoint4">
-      <wxString Value="E:\Varun\GitHub\learn\challenges\quora\src\01_Nearby.cpp" Name="file"/>
-      <int Value="275" Name="lineno"/>
-      <wxString Value="" Name="function_name"/>
-      <wxString Value="" Name="memory_address"/>
-      <int Value="1" Name="bp_type"/>
-      <int Value="0" Name="watchpoint_type"/>
-      <wxString Value="" Name="watchpt_data"/>
-      <CData Name="commandlist"/>
-      <bool Value="0" Name="regex"/>
-      <bool Value="0" Name="is_temp"/>
-      <bool Value="1" Name="is_enabled"/>
-      <int Value="0" Name="ignore_number"/>
-      <wxString Value="" Name="conditions"/>
-      <int Value="0" Name="origin"/>
-    </SerializedObject>
-    <SerializedObject Name="Breakpoint5">
-      <wxString Value="E:\Varun\GitHub\learn\challenges\quora\src\01_Nearby.cpp" Name="file"/>
-      <int Value="277" Name="lineno"/>
-      <wxString Value="" Name="function_name"/>
-      <wxString Value="" Name="memory_address"/>
-      <int Value="1" Name="bp_type"/>
-      <int Value="0" Name="watchpoint_type"/>
-      <wxString Value="" Name="watchpt_data"/>
-      <CData Name="commandlist"/>
-      <bool Value="0" Name="regex"/>
-      <bool Value="0" Name="is_temp"/>
-      <bool Value="1" Name="is_enabled"/>
-      <int Value="0" Name="ignore_number"/>
-      <wxString Value="" Name="conditions"/>
-      <int Value="0" Name="origin"/>
-    </SerializedObject>
-    <SerializedObject Name="Breakpoint6">
-      <wxString Value="E:\Varun\GitHub\learn\challenges\quora\src\01_Nearby.cpp" Name="file"/>
-      <int Value="296" Name="lineno"/>
-      <wxString Value="" Name="function_name"/>
-      <wxString Value="" Name="memory_address"/>
-      <int Value="1" Name="bp_type"/>
-      <int Value="0" Name="watchpoint_type"/>
-      <wxString Value="" Name="watchpt_data"/>
-      <CData Name="commandlist"/>
-      <bool Value="0" Name="regex"/>
-      <bool Value="0" Name="is_temp"/>
-      <bool Value="1" Name="is_enabled"/>
-      <int Value="0" Name="ignore_number"/>
-      <wxString Value="" Name="conditions"/>
-      <int Value="0" Name="origin"/>
-    </SerializedObject>
-    <SerializedObject Name="Breakpoint7">
-      <wxString Value="E:\Varun\GitHub\learn\challenges\quora\src\01_Nearby.cpp" Name="file"/>
-      <int Value="303" Name="lineno"/>
-      <wxString Value="" Name="function_name"/>
-      <wxString Value="" Name="memory_address"/>
-      <int Value="1" Name="bp_type"/>
-      <int Value="0" Name="watchpoint_type"/>
-      <wxString Value="" Name="watchpt_data"/>
-      <CData Name="commandlist"/>
-      <bool Value="0" Name="regex"/>
-      <bool Value="0" Name="is_temp"/>
-      <bool Value="1" Name="is_enabled"/>
-      <int Value="0" Name="ignore_number"/>
-      <wxString Value="" Name="conditions"/>
-      <int Value="0" Name="origin"/>
-    </SerializedObject>
-    <SerializedObject Name="Breakpoint8">
-      <wxString Value="E:\Varun\GitHub\learn\challenges\quora\src\01_Nearby.cpp" Name="file"/>
-      <int Value="308" Name="lineno"/>
       <wxString Value="" Name="function_name"/>
       <wxString Value="" Name="memory_address"/>
       <int Value="1" Name="bp_type"/>

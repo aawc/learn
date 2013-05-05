@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include "01_Nearby.cpp"
+#include "02_TypeAhead.cpp"
 
 int main(int argc, char **argv)
 {
-	ProblemNearby* problemNearby = new ProblemNearby();
-	delete problemNearby; problemNearby = NULL;
+	TypeAhead* typeAhead = new TypeAhead;
+	delete typeAhead; typeAhead = NULL;
 	return 0;
 }

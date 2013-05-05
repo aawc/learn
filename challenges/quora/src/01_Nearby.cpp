@@ -357,16 +357,19 @@ public:
 		{
 			delete this->queries[i];
 		}
+		this->queries.clear();
 
 		for (unsigned i = 0; i < this->questions.size(); i++)
 		{
 			delete this->questions[i];
 		}
+		this->questions.clear();
 
 		for (unsigned i = 0; i < this->topics.size(); i++)
 		{
 			delete this->topics[i];
 		}
+		this->topics.clear();
 	}
 };
 
