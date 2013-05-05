@@ -90,5 +90,6 @@
   <VirtualDirectory Name="src">
     <File Name="../src/main.cpp"/>
     <File Name="../src/01_Nearby.cpp"/>
+    <File Name="../src/02_TypeAhead.cpp"/>
   </VirtualDirectory>
 </CodeLite_Project>

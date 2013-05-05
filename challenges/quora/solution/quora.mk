@@ -13,8 +13,8 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=varunkh
-Date                   :=5/3/2013
-CodeLitePath           :="C:\Program Files (x86)\CodeLite"
+Date                   :=5/5/2013
+CodeLitePath           :="D:\Program Files (x86)\CodeLite"
 LinkerName             :=g++
 SharedObjectLinkerName :=g++ -shared -fPIC
 ObjectSuffix           :=.o
@@ -59,8 +59,8 @@ CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ##
 ## User defined environment variables
 ##
-CodeLiteDir:=C:\Program Files (x86)\CodeLite
-UNIT_TEST_PP_SRC_DIR:=C:\Program Files (x86)\CodeLite\UnitTest++-1.3
+CodeLiteDir:=D:\Program Files (x86)\CodeLite
+UNIT_TEST_PP_SRC_DIR:=D:\UnitTest++-1.3
 Objects0=$(IntermediateDirectory)/src_main$(ObjectSuffix) $(IntermediateDirectory)/src_01_Nearby$(ObjectSuffix) 
 
 

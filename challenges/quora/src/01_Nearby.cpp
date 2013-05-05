@@ -37,7 +37,7 @@ Sample Input:
  3 0
  4 0
  5 2 1 2
- t 2 0.0 0.0
+ t 2 1.0 1.0
  q 5 100.0 100.0
 
 Output format (write to STDOUT):
@@ -182,7 +182,7 @@ struct IDObjectAndDistance
 	static inline bool comparer(const IDObjectAndDistance* a, const IDObjectAndDistance* b)
 	{
 		if(a->distance == b->distance)
-			return a->object->GetID() < b->object->GetID();
+			return a->object->GetID() > b->object->GetID();
 
 		return a->distance < b->distance;
 	}
@@ -195,6 +195,7 @@ private:
 	vector<Topic*> topics;
 	vector<Question*> questions;
 	vector<Query*> queries;
+	vector<IDObjectAndDistance*> topicsAndDistances;
 
 	Topic* getTopicWithId(unsigned topicId)
 	{
@@ -204,6 +205,55 @@ private:
 				return topics[i];
 		}
 		return NULL;
+	}
+
+	void sortTopicsByDistanceFrom (Location* location)
+	{
+		for (unsigned j = 0; j < this->topics.size(); j++)
+		{
+			IDObjectAndDistance* topicAndDistance = new IDObjectAndDistance;
+			topicAndDistance->distance = location->distanceFrom(this->topics[j]->location);
+			topicAndDistance->object = this->topics[j];
+
+			this->topicsAndDistances.push_back(topicAndDistance);
+		}
+
+		std::sort(this->topicsAndDistances.begin(), this->topicsAndDistances.end(), IDObjectAndDistance::comparer);
+	}
+
+	vector<IDObjectAndDistance*> sortQuestionsByDistanceFrom (Location* location)
+	{
+		vector<IDObjectAndDistance*> questionsAndDistances;
+		for (unsigned i = 0; i < this->questions.size(); i++)
+		{
+			Question* question = this->questions[i];
+			double distance = this->topicsAndDistances[this->topicsAndDistances.size() - 1]->distance;
+
+			for (unsigned j = 0; j < question->topics.size(); j++)
+			{
+				Topic* topic = question->topics[j];
+				for (unsigned k = 0; k < this->topicsAndDistances.size(); k++)
+				{
+					if (topic == (Topic*)this->topicsAndDistances[k]->object)
+					{
+						double thisTopicDistance = this->topicsAndDistances[k]->distance;
+						if (distance > thisTopicDistance)
+						{
+							distance = thisTopicDistance;
+						}
+					}
+				}
+			}
+
+			IDObjectAndDistance* questionAndDistance = new IDObjectAndDistance;
+			questionAndDistance->object = question;
+			questionAndDistance->distance = distance;
+			questionsAndDistances.push_back(questionAndDistance);
+		}
+
+		std::sort(questionsAndDistances.begin(), questionsAndDistances.end(), IDObjectAndDistance::comparer);
+
+		return questionsAndDistances;
 	}
 
 public:
@@ -259,34 +309,44 @@ public:
 		for (unsigned i = 0; i < nn; i++)
 		{
 			Query* query = this->queries[i];
+			this->sortTopicsByDistanceFrom(query->location);
 
 			if (query->type == 't' && this->topics.size() != 0)
 			{
-				vector<IDObjectAndDistance*> topicsAndDistances;
-				for (unsigned j = 0; j < this->topics.size(); j++)
-				{
-					IDObjectAndDistance* topicAndDistance = new IDObjectAndDistance;
-					topicAndDistance->distance = query->location->distanceFrom(this->topics[j]->location);
-					topicAndDistance->object = this->topics[j];
-
-					topicsAndDistances.push_back(topicAndDistance);
-				}
-
-				std::sort(topicsAndDistances.begin(), topicsAndDistances.end(), IDObjectAndDistance::comparer);
-
-				unsigned numberOfResults = query->numberOfResults > topicsAndDistances.size() ? topicsAndDistances.size() : query->numberOfResults;
+				unsigned numberOfResults = query->numberOfResults > this->topicsAndDistances.size() ? this->topicsAndDistances.size() : query->numberOfResults;
 				for (unsigned j = 0; j < numberOfResults; j++)
 				{
-					cout << topicsAndDistances[j]->object->GetID() << " ";
+					if (j != 0)
+					{
+						cout << " ";
+					}
+					cout << this->topicsAndDistances[j]->object->GetID();
 				}
-
-				for (unsigned j = 0; j < topicsAndDistances.size(); j++)
-				{
-					delete topicsAndDistances[j];
-				}
+				cout << endl;
 			}
 			else if (this->questions.size() != 0)
 			{
+				vector<IDObjectAndDistance*> questionsAndDistances = this->sortQuestionsByDistanceFrom(query->location);
+				unsigned numberOfResults = query->numberOfResults > questionsAndDistances.size() ? questionsAndDistances.size() : query->numberOfResults;
+				for (unsigned j = 0; j < numberOfResults; j++)
+				{
+					if (j != 0)
+					{
+						cout << " ";
+					}
+					cout << questionsAndDistances[j]->object->GetID();
+				}
+				cout << endl;
+
+				for (unsigned j = 0; j < questionsAndDistances.size(); j++)
+				{
+					delete questionsAndDistances[j];
+				}
+			}
+
+			for (unsigned j = 0; j < this->topicsAndDistances.size(); j++)
+			{
+				delete this->topicsAndDistances[j];
 			}
 		}
 	}
@@ -309,3 +369,12 @@ public:
 		}
 	}
 };
+
+/*
+int main(int argc, char **argv)
+{
+	ProblemNearby* problemNearby = new ProblemNearby();
+	delete problemNearby; problemNearby = NULL;
+	return 0;
+}
+*/
