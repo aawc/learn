@@ -91,5 +91,6 @@
     <File Name="../src/main.cpp"/>
     <File Name="../src/01_Nearby.cpp"/>
     <File Name="../src/02_TypeAhead.cpp"/>
+    <File Name="../src/03_ScrabbleStepladder.cpp"/>
   </VirtualDirectory>
 </CodeLite_Project>

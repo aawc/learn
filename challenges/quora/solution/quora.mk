@@ -61,7 +61,7 @@ CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ##
 CodeLiteDir:=D:\Program Files (x86)\CodeLite
 UNIT_TEST_PP_SRC_DIR:=D:\UnitTest++-1.3
-Objects0=$(IntermediateDirectory)/src_main$(ObjectSuffix) $(IntermediateDirectory)/src_01_Nearby$(ObjectSuffix) $(IntermediateDirectory)/src_02_TypeAhead$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/src_main$(ObjectSuffix) $(IntermediateDirectory)/src_01_Nearby$(ObjectSuffix) $(IntermediateDirectory)/src_02_TypeAhead$(ObjectSuffix) $(IntermediateDirectory)/src_03_ScrabbleStepladder$(ObjectSuffix) 
 
 
 
@@ -112,6 +112,14 @@ $(IntermediateDirectory)/src_02_TypeAhead$(DependSuffix): ../src/02_TypeAhead.cp
 $(IntermediateDirectory)/src_02_TypeAhead$(PreprocessSuffix): ../src/02_TypeAhead.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_02_TypeAhead$(PreprocessSuffix) "../src/02_TypeAhead.cpp"
 
+$(IntermediateDirectory)/src_03_ScrabbleStepladder$(ObjectSuffix): ../src/03_ScrabbleStepladder.cpp $(IntermediateDirectory)/src_03_ScrabbleStepladder$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "E:/Varun/GitHub/learn/challenges/quora/src/03_ScrabbleStepladder.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_03_ScrabbleStepladder$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_03_ScrabbleStepladder$(DependSuffix): ../src/03_ScrabbleStepladder.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_03_ScrabbleStepladder$(ObjectSuffix) -MF$(IntermediateDirectory)/src_03_ScrabbleStepladder$(DependSuffix) -MM "../src/03_ScrabbleStepladder.cpp"
+
+$(IntermediateDirectory)/src_03_ScrabbleStepladder$(PreprocessSuffix): ../src/03_ScrabbleStepladder.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_03_ScrabbleStepladder$(PreprocessSuffix) "../src/03_ScrabbleStepladder.cpp"
+
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
 ##
@@ -127,6 +135,9 @@ clean:
 	$(RM) $(IntermediateDirectory)/src_02_TypeAhead$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/src_02_TypeAhead$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/src_02_TypeAhead$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/src_03_ScrabbleStepladder$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/src_03_ScrabbleStepladder$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/src_03_ScrabbleStepladder$(PreprocessSuffix)
 	$(RM) $(OutputFile)
 	$(RM) $(OutputFile).exe
 	$(RM) "../../../practice/solution/.build-debug/quora"
