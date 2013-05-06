@@ -303,12 +303,8 @@ public:
 			cin >> x >> y;
 			Location *queryLocation = new Location(x, y);
 
-			this->queries.push_back(new Query(ctype, numberOfResults, queryLocation));
-		}
-
-		for (unsigned i = 0; i < nn; i++)
-		{
-			Query* query = this->queries[i];
+			Query* query = new Query(ctype, numberOfResults, queryLocation);
+			this->queries.push_back(query);
 			this->sortTopicsByDistanceFrom(query->location);
 
 			if (query->type == 't' && this->topics.size() != 0)

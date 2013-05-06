@@ -282,25 +282,30 @@ public:
 		for (vector<string>::iterator searchTerm = searchTerms.begin(); searchTerm != searchTerms.end(); searchTerm++)
 		{
 			bool found = false;
+			const char* searchTermAsCStr = (*searchTerm).c_str();
+			unsigned searchTermLength = (*searchTerm).length();
+
 			for (vector<string>::iterator dataTerm = (*item)->data.begin(); dataTerm != (*item)->data.end(); dataTerm++)
 			{
-				const char* dataTermCStr = (*dataTerm).c_str();
-				const char* searchTermCStr = (*searchTerm).c_str();
-				unsigned dataTermLength = strlen(dataTermCStr);
-				unsigned searchTermLength = strlen(searchTermCStr);
-				unsigned i = 0;
-				while (i < dataTermLength && i < searchTermLength && tolower(*dataTermCStr) == tolower(*searchTermCStr))
+				unsigned dataTermLength = (*dataTerm).length();
+				if (dataTermLength >= searchTermLength)
 				{
-					dataTermCStr++; searchTermCStr++; i++;
+					const char* dataTermCStr = (*dataTerm).c_str();
+					const char* searchTermCStr = searchTermAsCStr;
+					unsigned i = 0;
+
+					while (i < dataTermLength && i < searchTermLength && tolower(*dataTermCStr) == tolower(*searchTermCStr))
+					{
+						dataTermCStr++; searchTermCStr++; i++;
+					}
+					found = (i == searchTermLength);
+					if (found) break;
 				}
-				found = (i == searchTermLength);
-				if (found) break;
 			}
 
 			if (!found)
 				return false;
 		}
-
 		return true;
 	}
 
