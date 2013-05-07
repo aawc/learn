@@ -69,18 +69,11 @@ Our best solution (written in C) can solve the following test case in under 5 se
 3 0 0 0 0 1 1
 */
 
+#include <ctime>
 #include <iostream>
 #include <map>
 #include <vector>
 using namespace std;
-
-/*
-struct CalculatedResults
-{
-	long long previousPath;
-	unsigned long numberOfPaths;
-};
-*/
 
 class DatacenterCooling
 {
@@ -93,35 +86,41 @@ class DatacenterCooling
 	unsigned numberOfElements;
 	unsigned **input;
 	unsigned stopNode;
-	unsigned acceptableResult;
+	unsigned *solution;
+
+	// This variable represents the bitmap of an acceptable result
+	// i.e. All the nodes that need to covered are marked with 1, all other are marked with 0.
+	// It helps us determine whether we have covered all valid nodes in traversing a path.
+	unsigned long long acceptableResult;
+	unsigned numberOfValidNodes;
 
 	static const unsigned START = 2;
 	static const unsigned STOP = 3;
 	static const unsigned OTHERS = 1;
-	long long found, stored;
+	unsigned long long found, stored;
 
-	unsigned getNodeNumberFromLocation(unsigned row, unsigned col)
+	inline unsigned getNodeNumberFromLocation(unsigned row, unsigned col)
 	{
 		return row*this->cols + col;
 	}
 
-	void getLocationFromNodeNumber(unsigned nodeNumber, unsigned& row, unsigned& col)
+	inline void getLocationFromNodeNumber(unsigned nodeNumber, unsigned& row, unsigned& col)
 	{
 		row = nodeNumber / this->cols;
 		col = nodeNumber % this->cols;
 	}
 
-	unsigned getStartNode()
+	inline unsigned getStartNode()
 	{
 		return this->getStartStopNode(START);
 	}
 
-	unsigned getStopNode()
+	inline unsigned getStopNode()
 	{
 		return this->getStartStopNode(STOP);
 	}
 
-	unsigned getStartStopNode(unsigned value)
+	inline unsigned getStartStopNode(unsigned value)
 	{
 		for (unsigned i = 0; i < this->rows; i++)
 		{
@@ -137,7 +136,7 @@ class DatacenterCooling
 		return -1;
 	}
 
-	bool isNodeAlreadyCovered(unsigned nodeNumber, long long alreadyCovered)
+	inline bool isNodeAlreadyCovered(unsigned nodeNumber, unsigned long long alreadyCovered)
 	{
 		long long result = 0x1;
 		for(unsigned i = 0; i < nodeNumber; i++)
@@ -147,23 +146,24 @@ class DatacenterCooling
 		return ((result & alreadyCovered) != 0);
 	}
 
-	void markNodeCovered(unsigned nodeNumber, long long& alreadyCovered)
+	inline void markNodeCovered(unsigned nodeNumber, unsigned index, unsigned long long& alreadyCovered)
 	{
-		long long result = 0x1;
+		unsigned long long result = 0x1;
 		for(unsigned i = 0; i < nodeNumber; i++)
 		{
 			result = result << 1;
 		}
 
 		alreadyCovered |= result;
+		this->solution[index] = nodeNumber;
 	}
 
-	signed getTopNode(unsigned thisNodeNumber)
+	inline signed getTopNode(unsigned thisNodeNumber)
 	{
 		return (thisNodeNumber - this->cols);
 	}
 
-	signed getBottomNode(unsigned thisNodeNumber)
+	inline signed getBottomNode(unsigned thisNodeNumber)
 	{
 		unsigned bottom = thisNodeNumber + this->cols;
 		if (bottom < this->numberOfElements)
@@ -171,61 +171,77 @@ class DatacenterCooling
 		return -1;
 	}
 
-	signed getLeftNode(unsigned thisNodeNumber)
+	inline signed getLeftNode(unsigned thisNodeNumber)
 	{
 		if (thisNodeNumber % this->cols == 0)
 			return -1;
 		return thisNodeNumber - 1;
 	}
 
-	signed getRightNode(unsigned thisNodeNumber)
+	inline signed getRightNode(unsigned thisNodeNumber)
 	{
 		if ((thisNodeNumber + 1) % this->cols == 0)
 			return -1;
 		return thisNodeNumber + 1;
 	}
 
-	bool shouldIgnoreNode(unsigned nodeNumber)
+	inline bool shouldIgnoreNode(unsigned nodeNumber)
 	{
 		unsigned row, col;
 		this->getLocationFromNodeNumber(nodeNumber, row, col);
 		return this->shouldIgnoreNode(row, col);
 	}
 
-	bool shouldIgnoreNode(unsigned row, unsigned col)
+	inline bool shouldIgnoreNode(unsigned row, unsigned col)
 	{
 		return (this->input[row][col] == OTHERS);
 	}
 
-	unsigned long getTotalPathsFromNodeAndCurrentlyCovered(unsigned thisNodeNumber, long long alreadyCovered)
+	unsigned long getTotalPathsFromNodeAndCurrentlyCovered(unsigned thisNodeNumber, unsigned thisIndex, unsigned long long alreadyCovered)
 	{
-		long long alreadyCoveredOriginal = alreadyCovered;
-		CalculatedResult calculatedResult = this->calculatedResults[thisNodeNumber];
-		CalculatedResult::iterator it;
-		it = calculatedResult.find(alreadyCoveredOriginal);
-		if (it != calculatedResult.end())
+		if (this->shouldIgnoreNode(thisNodeNumber) || this->isNodeAlreadyCovered(thisNodeNumber, alreadyCovered))
 		{
-			//cout << "Found: Node: " << thisNodeNumber << "; Covered: " << alreadyCovered << "; Value: " << it->second << endl;
-			this->found++;
-			return it->second;
-		}
-
-		if (this->isNodeAlreadyCovered(thisNodeNumber, alreadyCovered) || this->shouldIgnoreNode(thisNodeNumber))
-		{
+			// We're coming back to a node we've already traversed in the current path, OR
+			// This is an "OTHERS" node, so we can't use this node.
 			return 0;
 		}
 
-		this->markNodeCovered(thisNodeNumber, alreadyCovered);
+		this->markNodeCovered(thisNodeNumber, thisIndex, alreadyCovered);
 		if (thisNodeNumber == this->stopNode)
 		{
 			if (alreadyCovered == this->acceptableResult)
 			{
 				// Found another path;
+/*
+				cout << "Solution: ";
+				for (unsigned i = 0; i <= thisIndex; i++)
+				{
+					cout << this->solution[i] << "-";
+				}
+				cout << endl;
+*/
+
 				return 1;
 			}
 
 			// Found a path that does not cover all nodes.
 			return 0;
+		}
+
+		double ratio;
+
+		CalculatedResult calculatedResult = this->calculatedResults[thisNodeNumber];
+		CalculatedResult::iterator it;
+		it = calculatedResult.find(alreadyCovered);
+		if (it != calculatedResult.end())
+		{
+			//cout << "Found: Node: " << thisNodeNumber << "; Covered: " << alreadyCovered << "; Value: " << it->second << endl;
+			this->found += (this->numberOfValidNodes - thisIndex);
+			ratio = double(this->found)/this->stored;
+			cout << "Stored: " << this->stored << "; Found: " << this->found << "; Ratio: " << ratio << endl;
+			if (it->second != 0)
+				cout << "Second: " << it->second << endl;
+			return it->second;
 		}
 
 		signed topNode = this->getTopNode(thisNodeNumber);
@@ -236,30 +252,32 @@ class DatacenterCooling
 
 		if (topNode >= 0)
 		{
-			long long alreadyCoveredTop = alreadyCovered;
-			topPaths = this->getTotalPathsFromNodeAndCurrentlyCovered(topNode, alreadyCoveredTop);
+			unsigned long long alreadyCoveredTop = alreadyCovered;
+			topPaths = this->getTotalPathsFromNodeAndCurrentlyCovered(topNode, thisIndex + 1, alreadyCoveredTop);
 		}
 		if (bottomNode >= 0)
 		{
-			long long alreadyCoveredBottom = alreadyCovered;
-			bottomPaths = this->getTotalPathsFromNodeAndCurrentlyCovered(bottomNode, alreadyCoveredBottom);
+			unsigned long long alreadyCoveredBottom = alreadyCovered;
+			bottomPaths = this->getTotalPathsFromNodeAndCurrentlyCovered(bottomNode, thisIndex + 1, alreadyCoveredBottom);
 		}
 		if (leftNode >= 0)
 		{
-			long long alreadyCoveredLeft = alreadyCovered;
-			leftPaths = this->getTotalPathsFromNodeAndCurrentlyCovered(leftNode, alreadyCoveredLeft);
+			unsigned long long alreadyCoveredLeft = alreadyCovered;
+			leftPaths = this->getTotalPathsFromNodeAndCurrentlyCovered(leftNode, thisIndex + 1, alreadyCoveredLeft);
 		}
 		if (rightNode >= 0)
 		{
-			long long alreadyCoveredRight = alreadyCovered;
-			rightPaths = this->getTotalPathsFromNodeAndCurrentlyCovered(rightNode, alreadyCoveredRight);
+			unsigned long long alreadyCoveredRight = alreadyCovered;
+			rightPaths = this->getTotalPathsFromNodeAndCurrentlyCovered(rightNode, thisIndex + 1, alreadyCoveredRight);
 		}
 
 		unsigned long result = topPaths + bottomPaths + leftPaths + rightPaths;
-		calculatedResult[alreadyCoveredOriginal] = result;
+		calculatedResult[alreadyCovered] = result;
 		this->calculatedResults[thisNodeNumber] = calculatedResult;
 		//cout << "Storing: Node: " << thisNodeNumber << "; Covered: " << alreadyCoveredOriginal << "; Value: " << result << endl;
 		this->stored++;
+		ratio = double(this->found)/this->stored;
+		cout << "Stored: " << this->stored << "; Found: " << this->found << "; Ratio: " << ratio << endl;
 		return result;
 	}
 
@@ -270,18 +288,19 @@ public:
 		cin >> this->rows;
 		this->numberOfElements = this->rows * this-> cols;
 
-		unsigned k = 0;
-		unsigned bit = 0x1; this->acceptableResult = 0;
+		this->numberOfValidNodes = 0;
+		unsigned long long bit = 0x1; this->acceptableResult = 0;
 		this->input = new unsigned* [this->rows];
 		for (unsigned i = 0; i < this->rows; i++)
 		{
 			this->input[i] = new unsigned [this->cols];
-			for (unsigned j = 0; j < this->cols; j++, k++)
+			for (unsigned j = 0; j < this->cols; j++)
 			{
 				cin >> this->input[i][j];
 				if (!this->shouldIgnoreNode(i, j))
 				{
 					this->acceptableResult |= bit;
+					this->numberOfValidNodes++;
 				}
 				bit = bit << 1;
 
@@ -289,14 +308,20 @@ public:
 				this->calculatedResults.push_back(calculatedResult);
 			}
 		}
+		this->solution = new unsigned [this->numberOfValidNodes];
 
 		//cout << this->calculatedResults.size() << endl;
 		unsigned startNode = this->getStartNode();
 		this->stopNode = this->getStopNode();
 		//cout << startNode << '\t' << this->stopNode << endl;
 
-		long long alreadyCovered = 0; this->found = 0;
-		cout << this->getTotalPathsFromNodeAndCurrentlyCovered(startNode, alreadyCovered) << endl;
+		unsigned long long alreadyCovered = 0;
+		this->found = this->stored = 0;
+		//const clock_t startTime = clock();
+		cout << this->getTotalPathsFromNodeAndCurrentlyCovered(startNode, 0, alreadyCovered) << endl;
+		//const clock_t endTime = clock();
+
+		//cout << "Total time (in ms): " << (endTime - startTime) << endl;
 	}
 
 	~DatacenterCooling()
@@ -306,8 +331,18 @@ public:
 			delete []this->input[i];
 		}
 		delete []this->input;
+		delete []this->solution;
 
-		cout << "Stored: " << this->stored << endl;
-		cout << "Found: " << this->found << endl;
+		//cout << "Stored: " << this->stored << endl;
+		//cout << "Found: " << this->found << endl;
 	}
 };
+
+/*
+int main(int argc, char **argv)
+{
+	DatacenterCooling* datacenterCooling = new DatacenterCooling;
+	delete datacenterCooling; datacenterCooling = NULL;
+	return 0;
+}
+*/
