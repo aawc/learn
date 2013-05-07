@@ -69,16 +69,14 @@ Our best solution (written in C) can solve the following test case in under 5 se
 3 0 0 0 0 1 1
 */
 
-#include <ctime>
 #include <iostream>
 #include <map>
-#include <vector>
 using namespace std;
 
 class DatacenterCooling
 {
-	typedef map<long long, unsigned long> CalculatedResult;
-	typedef vector<CalculatedResult> CalculatedResults;
+	typedef pair<unsigned, unsigned long long> NodeNumberAndCoveredNodes;
+	typedef map<NodeNumberAndCoveredNodes, unsigned long> CalculatedResults;
 
 	CalculatedResults calculatedResults;
 	unsigned rows;
@@ -97,7 +95,7 @@ class DatacenterCooling
 	static const unsigned START = 2;
 	static const unsigned STOP = 3;
 	static const unsigned OTHERS = 1;
-	unsigned long long found, stored;
+	//unsigned long long found, stored;
 
 	inline unsigned getNodeNumberFromLocation(unsigned row, unsigned col)
 	{
@@ -212,15 +210,14 @@ class DatacenterCooling
 			if (alreadyCovered == this->acceptableResult)
 			{
 				// Found another path;
-/*
+				/*
 				cout << "Solution: ";
 				for (unsigned i = 0; i <= thisIndex; i++)
 				{
 					cout << this->solution[i] << "-";
 				}
 				cout << endl;
-*/
-
+				*/
 				return 1;
 			}
 
@@ -228,19 +225,30 @@ class DatacenterCooling
 			return 0;
 		}
 
-		double ratio;
+		NodeNumberAndCoveredNodes nodeNumberAndCoveredNodes;
+		nodeNumberAndCoveredNodes.first = thisNodeNumber;
+		nodeNumberAndCoveredNodes.second = alreadyCovered;
 
-		CalculatedResult calculatedResult = this->calculatedResults[thisNodeNumber];
-		CalculatedResult::iterator it;
-		it = calculatedResult.find(alreadyCovered);
-		if (it != calculatedResult.end())
+		CalculatedResults::iterator it;
+		it = this->calculatedResults.find(nodeNumberAndCoveredNodes);
+		if (it != this->calculatedResults.end())
 		{
 			//cout << "Found: Node: " << thisNodeNumber << "; Covered: " << alreadyCovered << "; Value: " << it->second << endl;
-			this->found += (this->numberOfValidNodes - thisIndex);
-			ratio = double(this->found)/this->stored;
-			cout << "Stored: " << this->stored << "; Found: " << this->found << "; Ratio: " << ratio << endl;
+			//this->found += (this->numberOfValidNodes - thisIndex);
+			//double ratio = double(this->found)/this->stored;
+			//cout << "Stored: " << this->stored << "; Found: " << this->found << "; Ratio: " << ratio << endl;
+			/*
 			if (it->second != 0)
-				cout << "Second: " << it->second << endl;
+			{
+				cout << "Solution: ";
+				for (unsigned i = 0; i <= thisIndex; i++)
+				{
+					cout << this->solution[i] << "-";
+				}
+				cout << endl;
+				cout << "Paths: " << it->second << endl;
+			}
+			*/
 			return it->second;
 		}
 
@@ -272,12 +280,11 @@ class DatacenterCooling
 		}
 
 		unsigned long result = topPaths + bottomPaths + leftPaths + rightPaths;
-		calculatedResult[alreadyCovered] = result;
-		this->calculatedResults[thisNodeNumber] = calculatedResult;
+		this->calculatedResults[nodeNumberAndCoveredNodes] = result;
 		//cout << "Storing: Node: " << thisNodeNumber << "; Covered: " << alreadyCoveredOriginal << "; Value: " << result << endl;
-		this->stored++;
-		ratio = double(this->found)/this->stored;
-		cout << "Stored: " << this->stored << "; Found: " << this->found << "; Ratio: " << ratio << endl;
+		//this->stored++;
+		//ratio = double(this->found)/this->stored;
+		//cout << "Stored: " << this->stored << "; Found: " << this->found << "; Ratio: " << ratio << endl;
 		return result;
 	}
 
@@ -303,9 +310,6 @@ public:
 					this->numberOfValidNodes++;
 				}
 				bit = bit << 1;
-
-				CalculatedResult calculatedResult;
-				this->calculatedResults.push_back(calculatedResult);
 			}
 		}
 		this->solution = new unsigned [this->numberOfValidNodes];
@@ -316,7 +320,7 @@ public:
 		//cout << startNode << '\t' << this->stopNode << endl;
 
 		unsigned long long alreadyCovered = 0;
-		this->found = this->stored = 0;
+		//this->found = this->stored = 0;
 		//const clock_t startTime = clock();
 		cout << this->getTotalPathsFromNodeAndCurrentlyCovered(startNode, 0, alreadyCovered) << endl;
 		//const clock_t endTime = clock();
