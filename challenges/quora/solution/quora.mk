@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=varunkh
-Date                   :=5/5/2013
+Date                   :=5/7/2013
 CodeLitePath           :="D:\Program Files (x86)\CodeLite"
 LinkerName             :=g++
 SharedObjectLinkerName :=g++ -shared -fPIC
@@ -61,7 +61,7 @@ CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ##
 CodeLiteDir:=D:\Program Files (x86)\CodeLite
 UNIT_TEST_PP_SRC_DIR:=D:\UnitTest++-1.3
-Objects0=$(IntermediateDirectory)/src_main$(ObjectSuffix) $(IntermediateDirectory)/src_01_Nearby$(ObjectSuffix) $(IntermediateDirectory)/src_02_TypeAhead$(ObjectSuffix) $(IntermediateDirectory)/src_03_ScrabbleStepladder$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/src_main$(ObjectSuffix) $(IntermediateDirectory)/src_01_Nearby$(ObjectSuffix) $(IntermediateDirectory)/src_02_TypeAhead$(ObjectSuffix) $(IntermediateDirectory)/src_03_ScrabbleStepladder$(ObjectSuffix) $(IntermediateDirectory)/src_04_DatacenterCooling$(ObjectSuffix) 
 
 
 
@@ -120,6 +120,14 @@ $(IntermediateDirectory)/src_03_ScrabbleStepladder$(DependSuffix): ../src/03_Scr
 $(IntermediateDirectory)/src_03_ScrabbleStepladder$(PreprocessSuffix): ../src/03_ScrabbleStepladder.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_03_ScrabbleStepladder$(PreprocessSuffix) "../src/03_ScrabbleStepladder.cpp"
 
+$(IntermediateDirectory)/src_04_DatacenterCooling$(ObjectSuffix): ../src/04_DatacenterCooling.cpp $(IntermediateDirectory)/src_04_DatacenterCooling$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "E:/Varun/GitHub/learn/challenges/quora/src/04_DatacenterCooling.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_04_DatacenterCooling$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_04_DatacenterCooling$(DependSuffix): ../src/04_DatacenterCooling.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_04_DatacenterCooling$(ObjectSuffix) -MF$(IntermediateDirectory)/src_04_DatacenterCooling$(DependSuffix) -MM "../src/04_DatacenterCooling.cpp"
+
+$(IntermediateDirectory)/src_04_DatacenterCooling$(PreprocessSuffix): ../src/04_DatacenterCooling.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_04_DatacenterCooling$(PreprocessSuffix) "../src/04_DatacenterCooling.cpp"
+
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
 ##
@@ -138,6 +146,9 @@ clean:
 	$(RM) $(IntermediateDirectory)/src_03_ScrabbleStepladder$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/src_03_ScrabbleStepladder$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/src_03_ScrabbleStepladder$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/src_04_DatacenterCooling$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/src_04_DatacenterCooling$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/src_04_DatacenterCooling$(PreprocessSuffix)
 	$(RM) $(OutputFile)
 	$(RM) $(OutputFile).exe
 	$(RM) "../../../practice/solution/.build-debug/quora"

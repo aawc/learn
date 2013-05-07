@@ -20,12 +20,22 @@ int main(int argc, char **argv)
 }
 */
 
-/**/
+/*
 #include "03_ScrabbleStepladder.cpp"
 int main(int argc, char **argv)
 {
 	ScrabbleStepladder* scrabbleStepladder = new ScrabbleStepladder;
 	delete scrabbleStepladder; scrabbleStepladder = NULL;
+	return 0;
+}
+*/
+
+/**/
+#include "04_DatacenterCooling.cpp"
+int main(int argc, char **argv)
+{
+	DatacenterCooling* datacenterCooling = new DatacenterCooling;
+	delete datacenterCooling; datacenterCooling = NULL;
 	return 0;
 }
 /**/
