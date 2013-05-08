@@ -70,15 +70,76 @@ Our best solution (written in C) can solve the following test case in under 5 se
 */
 
 #include <iostream>
-#include <map>
 using namespace std;
+
+struct Node
+{
+	unsigned long long alreadyCovered;
+	unsigned long numberOfPathsFound;
+	//unsigned long numberOfChildNodes;
+	Node *left;
+	Node *right;
+
+	Node (unsigned long long alreadyCovered, unsigned long numberOfPathsFound) :
+		alreadyCovered(alreadyCovered),
+		numberOfPathsFound(numberOfPathsFound),
+		//numberOfChildNodes(1),
+		left(NULL), right (NULL)
+	{}
+
+	static bool numberOfPathsIfAlreadyFound(Node* node, unsigned long long alreadyCovered, unsigned long& numberOfPathsFound)
+	{
+		if (node == NULL)
+			return false;
+
+		if (node->alreadyCovered == alreadyCovered)
+		{
+			numberOfPathsFound = node->numberOfPathsFound;
+			return true;
+		}
+
+		if (node->alreadyCovered < alreadyCovered)
+			return numberOfPathsIfAlreadyFound(node->right, alreadyCovered, numberOfPathsFound);
+
+		if (node->alreadyCovered > alreadyCovered)
+			return numberOfPathsIfAlreadyFound(node->left, alreadyCovered, numberOfPathsFound);
+
+		return false;
+	}
+
+	static void insertNode (Node** parentNodeRef, Node* nodeToInsert)
+	{
+		Node* parentNode = *parentNodeRef;
+		if (parentNode == NULL)
+		{
+			*parentNodeRef = nodeToInsert;
+			return;
+		}
+		//parentNode->numberOfChildNodes++;
+		if (parentNode->alreadyCovered < nodeToInsert->alreadyCovered)
+		{
+			insertNode(&(parentNode->right), nodeToInsert);
+		}
+		else
+		{
+			insertNode(&(parentNode->left), nodeToInsert);
+		}
+	}
+
+	static void deleteNode(Node *node)
+	{
+		if (node == NULL)
+			return;
+
+		deleteNode(node->left);
+		deleteNode(node->right);
+		delete node;
+	}
+};
 
 class DatacenterCooling
 {
-	typedef pair<unsigned, unsigned long long> NodeNumberAndCoveredNodes;
-	typedef map<NodeNumberAndCoveredNodes, unsigned long> CalculatedResults;
-
-	CalculatedResults calculatedResults;
+	Node** calculatedResults;
 	unsigned rows;
 	unsigned cols;
 	unsigned numberOfElements;
@@ -201,6 +262,14 @@ class DatacenterCooling
 		{
 			// We're coming back to a node we've already traversed in the current path, OR
 			// This is an "OTHERS" node, so we can't use this node.
+			/*
+			cout << endl;
+			for (unsigned i = 0; i < thisIndex; i++)
+			{
+				cout << this->solution[i] << "-";
+			}
+			cout << thisNodeNumber << ": Pruned!";
+			*/
 			return 0;
 		}
 
@@ -211,45 +280,44 @@ class DatacenterCooling
 			{
 				// Found another path;
 				/*
-				cout << "Solution: ";
-				for (unsigned i = 0; i <= thisIndex; i++)
+				cout << endl;
+				for (unsigned i = 0; i < thisIndex; i++)
 				{
 					cout << this->solution[i] << "-";
 				}
-				cout << endl;
+				cout << thisNodeNumber << ": SUCCESS!";
 				*/
 				return 1;
 			}
 
+			/*
+			cout << endl;
+			for (unsigned i = 0; i < thisIndex; i++)
+			{
+				cout << this->solution[i] << "-";
+			}
+			cout << thisNodeNumber << ": Pruned!";
+			*/
 			// Found a path that does not cover all nodes.
 			return 0;
 		}
 
-		NodeNumberAndCoveredNodes nodeNumberAndCoveredNodes;
-		nodeNumberAndCoveredNodes.first = thisNodeNumber;
-		nodeNumberAndCoveredNodes.second = alreadyCovered;
-
-		CalculatedResults::iterator it;
-		it = this->calculatedResults.find(nodeNumberAndCoveredNodes);
-		if (it != this->calculatedResults.end())
+		Node **root = &this->calculatedResults[thisNodeNumber];
+		unsigned long numberofPaths;
+		if (Node::numberOfPathsIfAlreadyFound(*root, alreadyCovered, numberofPaths))
 		{
-			//cout << "Found: Node: " << thisNodeNumber << "; Covered: " << alreadyCovered << "; Value: " << it->second << endl;
-			//this->found += (this->numberOfValidNodes - thisIndex);
-			//double ratio = double(this->found)/this->stored;
-			//cout << "Stored: " << this->stored << "; Found: " << this->found << "; Ratio: " << ratio << endl;
 			/*
-			if (it->second != 0)
+			if (numberofPaths > 0)
 			{
-				cout << "Solution: ";
+				cout << endl;
 				for (unsigned i = 0; i <= thisIndex; i++)
 				{
 					cout << this->solution[i] << "-";
 				}
-				cout << endl;
-				cout << "Paths: " << it->second << endl;
+				cout << ": Paths: " << numberofPaths;
 			}
 			*/
-			return it->second;
+			return numberofPaths;
 		}
 
 		signed topNode = this->getTopNode(thisNodeNumber);
@@ -280,11 +348,11 @@ class DatacenterCooling
 		}
 
 		unsigned long result = topPaths + bottomPaths + leftPaths + rightPaths;
-		this->calculatedResults[nodeNumberAndCoveredNodes] = result;
-		//cout << "Storing: Node: " << thisNodeNumber << "; Covered: " << alreadyCoveredOriginal << "; Value: " << result << endl;
-		//this->stored++;
-		//ratio = double(this->found)/this->stored;
-		//cout << "Stored: " << this->stored << "; Found: " << this->found << "; Ratio: " << ratio << endl;
+		if (result != 0)
+		{
+			Node* node = new Node(alreadyCovered, result);
+			Node::insertNode(root, node);
+		}
 		return result;
 	}
 
@@ -294,6 +362,7 @@ public:
 		cin >> this->cols;
 		cin >> this->rows;
 		this->numberOfElements = this->rows * this-> cols;
+		this->calculatedResults = new Node* [this->numberOfElements];
 
 		this->numberOfValidNodes = 0;
 		unsigned long long bit = 0x1; this->acceptableResult = 0;
@@ -304,12 +373,15 @@ public:
 			for (unsigned j = 0; j < this->cols; j++)
 			{
 				cin >> this->input[i][j];
-				if (!this->shouldIgnoreNode(i, j))
+				unsigned nodeNumber = this->getNodeNumberFromLocation(i, j);
+				if (!this->shouldIgnoreNode(nodeNumber))
 				{
 					this->acceptableResult |= bit;
 					this->numberOfValidNodes++;
 				}
 				bit = bit << 1;
+
+				this->calculatedResults[nodeNumber] = NULL;
 			}
 		}
 		this->solution = new unsigned [this->numberOfValidNodes];
@@ -333,9 +405,28 @@ public:
 		for (unsigned i = 0; i < this->rows; i++)
 		{
 			delete []this->input[i];
+			for (unsigned j = 0; j < this->cols; j++)
+			{
+				unsigned nodeNumber = this->getNodeNumberFromLocation(i, j);
+				Node *calculatedResult = this->calculatedResults[nodeNumber];
+				/*
+				cout << nodeNumber << ": ";
+				if (calculatedResult != NULL)
+				{
+					cout << calculatedResult->numberOfChildNodes;
+				}
+				else
+				{
+					cout << "NULL";
+				}
+				cout << endl;
+				*/
+				Node::deleteNode(calculatedResult);
+			}
 		}
 		delete []this->input;
 		delete []this->solution;
+		delete []this->calculatedResults;
 
 		//cout << "Stored: " << this->stored << endl;
 		//cout << "Found: " << this->found << endl;
