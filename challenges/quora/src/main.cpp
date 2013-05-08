@@ -30,12 +30,22 @@ int main(int argc, char **argv)
 }
 */
 
-/**/
+/*
 #include "04_DatacenterCooling.cpp"
 int main(int argc, char **argv)
 {
 	DatacenterCooling* datacenterCooling = new DatacenterCooling;
 	delete datacenterCooling; datacenterCooling = NULL;
+	return 0;
+}
+*/
+
+/**/
+#include "05_FeedOptimizer.cpp"
+int main(int argc, char **argv)
+{
+	FeedOptimizer* feedOptimizer = new FeedOptimizer;
+	delete feedOptimizer; feedOptimizer = NULL;
 	return 0;
 }
 /**/

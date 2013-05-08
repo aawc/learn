@@ -61,7 +61,7 @@ CFLAGS   :=  -g -O0 -Wall $(Preprocessors)
 ##
 CodeLiteDir:=D:\Program Files (x86)\CodeLite
 UNIT_TEST_PP_SRC_DIR:=D:\UnitTest++-1.3
-Objects0=$(IntermediateDirectory)/src_main$(ObjectSuffix) $(IntermediateDirectory)/src_01_Nearby$(ObjectSuffix) $(IntermediateDirectory)/src_02_TypeAhead$(ObjectSuffix) $(IntermediateDirectory)/src_03_ScrabbleStepladder$(ObjectSuffix) $(IntermediateDirectory)/src_04_DatacenterCooling$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/src_main$(ObjectSuffix) $(IntermediateDirectory)/src_01_Nearby$(ObjectSuffix) $(IntermediateDirectory)/src_02_TypeAhead$(ObjectSuffix) $(IntermediateDirectory)/src_03_ScrabbleStepladder$(ObjectSuffix) $(IntermediateDirectory)/src_04_DatacenterCooling$(ObjectSuffix) $(IntermediateDirectory)/src_05_FeedOptimizer$(ObjectSuffix) 
 
 
 
@@ -128,6 +128,14 @@ $(IntermediateDirectory)/src_04_DatacenterCooling$(DependSuffix): ../src/04_Data
 $(IntermediateDirectory)/src_04_DatacenterCooling$(PreprocessSuffix): ../src/04_DatacenterCooling.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_04_DatacenterCooling$(PreprocessSuffix) "../src/04_DatacenterCooling.cpp"
 
+$(IntermediateDirectory)/src_05_FeedOptimizer$(ObjectSuffix): ../src/05_FeedOptimizer.cpp $(IntermediateDirectory)/src_05_FeedOptimizer$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "E:/Varun/GitHub/learn/challenges/quora/src/05_FeedOptimizer.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_05_FeedOptimizer$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_05_FeedOptimizer$(DependSuffix): ../src/05_FeedOptimizer.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_05_FeedOptimizer$(ObjectSuffix) -MF$(IntermediateDirectory)/src_05_FeedOptimizer$(DependSuffix) -MM "../src/05_FeedOptimizer.cpp"
+
+$(IntermediateDirectory)/src_05_FeedOptimizer$(PreprocessSuffix): ../src/05_FeedOptimizer.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_05_FeedOptimizer$(PreprocessSuffix) "../src/05_FeedOptimizer.cpp"
+
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
 ##
@@ -149,6 +157,9 @@ clean:
 	$(RM) $(IntermediateDirectory)/src_04_DatacenterCooling$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/src_04_DatacenterCooling$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/src_04_DatacenterCooling$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/src_05_FeedOptimizer$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/src_05_FeedOptimizer$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/src_05_FeedOptimizer$(PreprocessSuffix)
 	$(RM) $(OutputFile)
 	$(RM) $(OutputFile).exe
 	$(RM) "../../../practice/solution/.build-debug/quora"
