@@ -66,16 +66,46 @@ You should aim to have your algorithm be fast enough to solve our largest test i
 
 struct Story
 {
+	unsigned id;
+	unsigned long long time;
+	unsigned long long score;
+	unsigned long long height;
+	double scorePerPixel;
 
+	static unsigned idCount;
+	Story(unsigned time, unsigned score, unsigned height) :
+		id(++Story::idCount),
+		time(time),
+		score(score),
+		height(height),
+		scorePerPixel(double(score)/height)
+	{}
 };
 
 class FeedOptimizer
 {
 private:
+	unsigned numberOfEvents;
+	unsigned recentWindow;
+	unsigned browserHeight;
 
 public:
 	FeedOptimizer()
 	{
+		cin >> this->numberOfEvents;
+		cin >> this->recentWindow;
+		cin >> this->browserHeight;
+
+		for (unsigned i=0; i<this->numberOfEvents; i++)
+		{
+			char eventType;
+			cin >> eventType;
+			if (eventType)
+			{
+				case 'S':
+				case 'R':
+			}
+		}
 	}
 
 	~FeedOptimizer()

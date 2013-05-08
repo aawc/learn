@@ -42,6 +42,7 @@ int main(int argc, char **argv)
 
 /**/
 #include "05_FeedOptimizer.cpp"
+unsigned Story::idCount = 0;
 int main(int argc, char **argv)
 {
 	FeedOptimizer* feedOptimizer = new FeedOptimizer;
