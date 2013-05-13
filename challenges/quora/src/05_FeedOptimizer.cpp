@@ -64,6 +64,9 @@ All heights are positive integers.
 You should aim to have your algorithm be fast enough to solve our largest test inputs in under 5 seconds, or be as close to that as possible.
 */
 
+#include <iostream>
+using namespace std;
+
 struct Story
 {
 	unsigned id;
@@ -100,10 +103,11 @@ public:
 		{
 			char eventType;
 			cin >> eventType;
-			if (eventType)
+			switch (eventType)
 			{
 				case 'S':
 				case 'R':
+					;
 			}
 		}
 	}
