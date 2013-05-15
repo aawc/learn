@@ -1,0 +1,32 @@
+The rabbit looks up from reading JIRA tickets, saying, "Hi, I'm Bugs", in what
+we promise is the worst pun in the game, with the possible exception of the
+very next line.
+
+"I'm pulling my hare out trying to track down this bug.  Can you take a look at
+this?"
+
+He shows you the screen, which is displaying:
+
+{]
+
+1
+
+({})}()
+
+4
+
+{{[{{{{}}{{}}}[]}[][{}][({[((
+{{[][()()]}}{[{{{}}}]}))][()]
+{[[{((()))({}(())[][])}][]()]
+}{()[()]}]})][]]}{{}[]}}
+
+"Apparently folks, at some point, that third string goes wrong too.  When you
+find out what index has an incorrect closing mark, type it in to the
+computer."
+
+"As you can see I solved the first two problems, but I just can't crack the
+third one."
+
+
+Answer: 96
+{{[____________________[({______________________________________________________________________]})]__]}{{}[]}}
