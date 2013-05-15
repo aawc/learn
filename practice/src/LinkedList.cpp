@@ -10,7 +10,7 @@ LinkedList::LinkedList (void)
 {
 	if (!initialized)
 	{
-		srand(time(NULL));
+		srand((unsigned)time(NULL));
 		initialized = true;
 	}
 

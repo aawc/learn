@@ -10,10 +10,18 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\01_Nearby.cpp" />
+    <ClCompile Include="..\..\src\02_TypeAhead.cpp" />
+    <ClCompile Include="..\..\src\03_ScrabbleStepladder.cpp" />
+    <ClCompile Include="..\..\src\04_DatacenterCooling.cpp" />
+    <ClCompile Include="..\..\src\05_FeedOptimizer.cpp" />
+    <ClCompile Include="..\..\src\main.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{CC05132D-1683-497D-BFFE-F58EAFA4B2B8}</ProjectGuid>
+    <ProjectGuid>{61C68AA2-D85E-4CCB-97B1-DAF5E7726DF8}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>practice</RootNamespace>
+    <RootNamespace>Quora</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -75,14 +83,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\challenges\quora\src\01_Nearby.cpp" />
-    <ClCompile Include="..\..\..\..\challenges\quora\src\02_TypeAhead.cpp" />
-    <ClCompile Include="..\..\..\..\challenges\quora\src\03_ScrabbleStepladder.cpp" />
-    <ClCompile Include="..\..\..\..\challenges\quora\src\04_DatacenterCooling.cpp" />
-    <ClCompile Include="..\..\..\..\challenges\quora\src\05_FeedOptimizer.cpp" />
-    <ClCompile Include="..\..\..\..\challenges\quora\src\main.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

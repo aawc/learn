@@ -69,7 +69,7 @@ QuickSortSTL<T>::QuickSortSTL(unsigned n, T(*randomGenerator)())
 	}
 
 	/* initialize random seed: */
-	srand(time(NULL));
+	srand((unsigned)time(NULL));
 
 	for (unsigned i = 0; i < n; i++)
 	{

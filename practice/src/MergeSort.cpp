@@ -83,7 +83,7 @@ MergeSort::MergeSort(int n) : length(0), A(NULL)
 	}
 
 	/* initialize random seed: */
-	srand(time(NULL));
+	srand((unsigned)time(NULL));
 
 	this->length = n;
 	this->A = new int [this->length];

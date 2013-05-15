@@ -69,7 +69,7 @@ InsertSortSTL::InsertSortSTL(int n)
 	}
 
 	/* initialize random seed: */
-	srand(time(NULL));
+	srand((unsigned)time(NULL));
 
 	for (int i = 0; i < n; i++)
 	{

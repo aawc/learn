@@ -66,7 +66,7 @@ InsertSort::InsertSort(int n)
 	}
 
 	/* initialize random seed: */
-	srand(time(NULL));
+	srand((unsigned)time(NULL));
 
 	this->length = n;
 	this->A = new int [this->length];

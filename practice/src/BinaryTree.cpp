@@ -32,7 +32,7 @@ void BinaryTree::Init(void)
 {
     if (!initialized)
     {
-        srand(time(NULL));
+        srand((unsigned)time(NULL));
         initialized = true;
     }
 }
