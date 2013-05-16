@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="VAX_Random_Guess.cpp">
+    <ClCompile Include="..\src\VAX_Random_Guess.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
