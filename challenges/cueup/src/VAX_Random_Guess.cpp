@@ -142,14 +142,14 @@ private:
 		}
 	}
 };
-
+/*
 int main (int argc, char* argv[])
 {
 	VAX_Random_Guess* ptr = new VAX_Random_Guess();
 	delete ptr;
 	return 0;
 }
-
+*/
 /*
 #include <cstdio>
  
