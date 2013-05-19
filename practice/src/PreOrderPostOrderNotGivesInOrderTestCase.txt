@@ -1,0 +1,31 @@
+								14595
+					10778-							-28985
+			9765-							20250-				-30519
+		586-							18524-		-25250 		29468-
+			-7452					16582-		20377-
+				-8265
+
+
+DisplayPreOrder : 14595 - 10778 -  9765 -   586 -  7452 -  8265 - 28985 - 20250 - 18524 - 16582 - 25250 - 20377 - 30519 - 29468
+DisplayInOrder  :   586 -  7452 -  8265 -  9765 - 10778 - 14595 - 16582 - 18524 - 20250 - 20377 - 25250 - 28985 - 29468 - 30519
+DisplayPostOrder:  8265 -  7452 -   586 -  9765 - 10778 - 16582 - 18524 - 20377 - 25250 - 20250 - 29468 - 30519 - 28985 - 14595
+                    0   -   1   -   2   -   3   -   4   -   5   -   6   -   7   -   8   -   9   -   10  -   11  -   12  -   13
+
+
+Number of elements: 14
+Added as root: 14595
+Added: 28985 to the right of: 14595
+Added: 20250 to the left of: 28985
+Added: 10778 to the left of: 14595
+Added: 25250 to the right of: 20250
+Added: 9765 to the left of: 10778
+Added: 30519 to the right of: 28985
+Added: 18524 to the left of: 20250
+Added: 586 to the left of: 9765
+Added: 7452 to the right of: 586
+Added: 16582 to the left of: 18524
+Added: 20377 to the left of: 25250
+Added: 29468 to the left of: 30519
+Added: 8265 to the right of: 7452
+
+14 14595 28985 20250 10778 25250 9765 30519 18524 586 7452 16582 20377 29468 8265 
