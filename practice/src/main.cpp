@@ -1,12 +1,13 @@
 #include <cstdlib>
-//#include "../include/BinaryTree.h"
+#include "../include/BinaryTree.h"
+#include "../src/BinaryTree.cpp"
 //#include "../include/ThreadedBinaryTree.h"
 //#include "../include/MergeSort.h"
 //#include "../include/MergeSortSTL.h"
 //#include "../include/InsertSort.h"
 //#include "../include/InsertSortSTL.h"
 //#include "../include/QuickSortSTL.h"
-#include "../include/LinkedListLoop.h"
+//#include "../include/LinkedListLoop.h"
 using namespace std;
 
 int randomNumberGenerator()
@@ -16,10 +17,9 @@ int randomNumberGenerator()
 
 int main (int, char**)
 {
-	/*
-	BinaryTree *binaryTree = new BinaryTree();
+	const unsigned MAX_ELEMENTS = 15;
+	BinaryTree<unsigned> *binaryTree = new BinaryTree<unsigned>(MAX_ELEMENTS);
 	delete binaryTree; binaryTree = NULL;
-	*/
 
 	/*
 	ThreadedBinaryTree *threadedBinaryTree = new ThreadedBinaryTree();
@@ -56,8 +56,10 @@ int main (int, char**)
 	delete quickSortSTL; quickSortSTL = NULL;
 	*/
 
+	/*
 	LinkedListLoop *linkedListLoop = new LinkedListLoop();
 	delete linkedListLoop; linkedListLoop = NULL;
+	*/
 
 	return 0;
 }

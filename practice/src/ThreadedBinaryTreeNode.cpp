@@ -14,11 +14,11 @@ ThreadedBinaryTreeNode::ThreadedBinaryTreeNode(const ThreadedBinaryTreeNode& b)
 ThreadedBinaryTreeNode& ThreadedBinaryTreeNode::operator=(const ThreadedBinaryTreeNode& b)
 {
 	this->info = b.info;
-    this->left = b.left;
+	this->left = b.left;
 	this->right = b.right;
-    this->previous = b.previous;
+	this->previous = b.previous;
 	this->next = b.next;
-    return *this;
+	return *this;
 }
 
 ThreadedBinaryTreeNode::~ThreadedBinaryTreeNode(void)

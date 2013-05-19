@@ -8,7 +8,7 @@ class ThreadedBinaryTree
 		static const int MAX_ELEMENTS = 20;
 
 	private:
-	    static void Init(void);
+		static void Init(void);
 		void Build(void);
 		ThreadedBinaryTreeNode* FindPreOrderParent(int info, ThreadedBinaryTreeNode* node);
 		void Display();

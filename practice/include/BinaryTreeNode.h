@@ -1,20 +1,26 @@
+#ifndef _BinaryTreeNode_H
+#define _BinaryTreeNode_H
+
+template <typename T>
 class BinaryTreeNode
 {
 	private:
-		int info;
+		T info;
 		BinaryTreeNode* left;
 		BinaryTreeNode* right;
 
 	public:
-		BinaryTreeNode();
+		BinaryTreeNode(void);
 		virtual ~BinaryTreeNode();
 		BinaryTreeNode(const BinaryTreeNode& b);
 		BinaryTreeNode& operator=(const BinaryTreeNode& b);
 
-		int getInfo();
+		T getInfo();
 		BinaryTreeNode* getLeft();
 		BinaryTreeNode* getRight();
-		void setInfo(int);
+		void setInfo(T);
 		void setLeft(BinaryTreeNode*);
 		void setRight(BinaryTreeNode*);
 };
+
+#endif //_BinaryTreeNode_H
