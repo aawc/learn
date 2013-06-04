@@ -72,12 +72,17 @@ int main (int, char**)
 	fields1.push_back(Field1(2, "TWO"));
 	fields1.push_back(Field1(2, "two"));
 	fields1.push_back(Field1(3, "THREE"));
+	fields1.push_back(Field1(3, "three"));
+	fields1.push_back(Field1(4, "FOUR"));
+	fields1.push_back(Field1(5, "FIVE"));
+	fields1.push_back(Field1(5, "five"));
 
 	fields2.push_back(Field2(1, "ek"));
 	fields2.push_back(Field2(2, "do"));
 	fields2.push_back(Field2(2, "du"));
 	fields2.push_back(Field2(3, "tray"));
 	fields2.push_back(Field2(4, "char"));
+	fields2.push_back(Field2(4, "chaar"));
 
 	fullJoin(fields1, fields2);
 
