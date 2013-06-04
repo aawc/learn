@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\BinaryTree.cpp" />
     <ClCompile Include="..\..\src\BinaryTreeNode.cpp" />
+    <ClCompile Include="..\..\src\FullJoin.cpp" />
     <ClCompile Include="..\..\src\InsertSort.cpp" />
     <ClCompile Include="..\..\src\InsertSortSTL.cpp" />
     <ClCompile Include="..\..\src\LinkedList.cpp" />
