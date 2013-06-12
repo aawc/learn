@@ -9,7 +9,8 @@
 //#include "../include/InsertSortSTL.h"
 //#include "../include/QuickSortSTL.h"
 //#include "../include/LinkedListLoop.h"
-#include "../include/FullJoin.h"
+//#include "../include/FullJoin.h"
+#include "../include/LinkedListNFromBack.h"
 using namespace std;
 
 int randomNumberGenerator()
@@ -61,30 +62,19 @@ int main (int, char**)
 	*/
 
 	/*
-	LinkedListLoop *linkedListLoop = new LinkedListLoop();
+	const unsigned MAX_ELEMENTS = 15;
+	LinkedListLoop *linkedListLoop = new LinkedListLoop(MAX_ELEMENTS);
 	delete linkedListLoop; linkedListLoop = NULL;
 	*/
 
-	vector<Field1> fields1;// {0, "ZERO"}, {1, "ONE"}, {2, "TWO"}, {2, "two"}, {3, "THREE"}
-	vector<Field2> fields2;// {1, "ek"}, {2, "do"}, {2, "du"}, {3, "tray"}, {4, "char"}
-	fields1.push_back(Field1(0, "ZERO"));
-	fields1.push_back(Field1(1, "ONE"));
-	fields1.push_back(Field1(2, "TWO"));
-	fields1.push_back(Field1(2, "two"));
-	fields1.push_back(Field1(3, "THREE"));
-	fields1.push_back(Field1(3, "three"));
-	fields1.push_back(Field1(4, "FOUR"));
-	fields1.push_back(Field1(5, "FIVE"));
-	fields1.push_back(Field1(5, "five"));
+	/*
+	FullJoin* fullJoin = new FullJoin;
+	delete fullJoin; fullJoin = NULL;
+	*/
 
-	fields2.push_back(Field2(1, "ek"));
-	fields2.push_back(Field2(2, "do"));
-	fields2.push_back(Field2(2, "du"));
-	fields2.push_back(Field2(3, "tray"));
-	fields2.push_back(Field2(4, "char"));
-	fields2.push_back(Field2(4, "chaar"));
-
-	fullJoin(fields1, fields2);
+	const unsigned MAX_ELEMENTS = 15;
+	LinkedListNFromBack * linkedListNFromBack = new LinkedListNFromBack(MAX_ELEMENTS);
+	delete linkedListNFromBack; linkedListNFromBack = NULL;
 
 	return 0;
 }

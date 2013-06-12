@@ -6,6 +6,6 @@ class LinkedListLoop
 		LinkedList *list;
 
 	public:
-		LinkedListLoop(void);
+		LinkedListLoop(const unsigned maxElements);
 		~LinkedListLoop(void);
 };

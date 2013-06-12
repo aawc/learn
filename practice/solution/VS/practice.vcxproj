@@ -18,6 +18,7 @@
     <ClCompile Include="..\..\src\InsertSortSTL.cpp" />
     <ClCompile Include="..\..\src\LinkedList.cpp" />
     <ClCompile Include="..\..\src\LinkedListLoop.cpp" />
+    <ClCompile Include="..\..\src\LinkedListNFromBack.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\MergeSort.cpp" />
     <ClCompile Include="..\..\src\MergeSortSTL.cpp" />

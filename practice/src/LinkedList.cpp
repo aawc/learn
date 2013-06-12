@@ -5,16 +5,28 @@
 #include "../include/LinkedList.h"
 using namespace std;
 
-LinkedList::LinkedList (void)
-	: root(NULL), last(NULL), isCircular(false)
+LinkedList::LinkedList (const unsigned maxElements)
 {
+	this->construct(maxElements, (rand() % 2 == 1));
+}
+
+LinkedList::LinkedList (const unsigned maxElements, bool isCircular)
+{
+	this->construct(maxElements, isCircular);
+}
+
+void LinkedList::construct (const unsigned maxElements, bool isCircular)
+{
+	this->root = NULL; this->last = NULL;
+	this->isCircular = isCircular;
+
 	if (!initialized)
 	{
 		srand((unsigned)time(NULL));
 		initialized = true;
 	}
 
-	int numberOfElements = rand() % 15 + 1;
+	int numberOfElements = rand() % maxElements + 1;
 	cout << "Number of elements: " << numberOfElements << endl;
 	for (int i = 0; i < numberOfElements; i++)
 	{
@@ -43,7 +55,6 @@ LinkedList::LinkedList (void)
 		cout << "Added: " << info << endl;
 	}
 
-	this->isCircular = (rand() % 2 == 1);
 	if (this->isCircular)
 	{
 		this->last->next = this->root;
@@ -123,4 +134,34 @@ bool LinkedList::HasLoop (void)
 	}
 	return false;
 }
+
+LinkedListNode* LinkedList::FindFromBack(unsigned numberOfElementToFindFromBack)
+{
+	if (this->root == NULL)
+	{
+		return NULL;
+	}
+
+	LinkedListNode* nodeAhead = this->root;
+	unsigned i = 0;
+	while (i < numberOfElementToFindFromBack)
+	{
+		if (nodeAhead->next == NULL)
+		{
+			return NULL;
+		}
+
+		nodeAhead = nodeAhead->next;
+		i++;
+	}
+
+	LinkedListNode* nodeBehind = this->root;
+	while (nodeAhead->next != NULL)
+	{
+		nodeBehind = nodeBehind->next;
+		nodeAhead = nodeAhead->next;
+	}
+	return nodeBehind;;
+}
+
 bool LinkedList::initialized;

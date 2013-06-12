@@ -4,9 +4,9 @@
 #include "../include/LinkedListLoop.h"
 using namespace std;
 
-LinkedListLoop::LinkedListLoop(void)
+LinkedListLoop::LinkedListLoop(const unsigned maxElements)
 {
-	this->list = new LinkedList();
+	this->list = new LinkedList(maxElements);
 	if (!this->list->LoopExpectationMatches())
 	{
 		cout << "We got a problem!" << endl;
