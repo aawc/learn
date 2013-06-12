@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <vector>
-//#include "../include/BinaryTree.h"
-//#include "../src/BinaryTree.cpp"
+#include "../include/IntBinaryTreeNodeContent.h"
+#include "../include/BinaryTree.h"
 //#include "../include/ThreadedBinaryTree.h"
 //#include "../include/MergeSort.h"
 //#include "../include/MergeSortSTL.h"
@@ -10,7 +10,7 @@
 //#include "../include/QuickSortSTL.h"
 //#include "../include/LinkedListLoop.h"
 //#include "../include/FullJoin.h"
-#include "../include/LinkedListNFromBack.h"
+//#include "../include/LinkedListNFromBack.h"
 using namespace std;
 
 int randomNumberGenerator()
@@ -20,11 +20,9 @@ int randomNumberGenerator()
 
 int main (int, char**)
 {
-	/*
-	const unsigned MAX_ELEMENTS = 15;
-	BinaryTree<unsigned> *binaryTree = new BinaryTree<unsigned>(MAX_ELEMENTS);
+	const unsigned MAX_ELEMENTS = 25;
+	BinaryTree *binaryTree = new BinaryTree(MAX_ELEMENTS, IntBinaryTreeNodeContent::CreateIntBinaryTreeNodeContent);
 	delete binaryTree; binaryTree = NULL;
-	*/
 
 	/*
 	ThreadedBinaryTree *threadedBinaryTree = new ThreadedBinaryTree();
@@ -72,9 +70,11 @@ int main (int, char**)
 	delete fullJoin; fullJoin = NULL;
 	*/
 
+	/*
 	const unsigned MAX_ELEMENTS = 15;
 	LinkedListNFromBack * linkedListNFromBack = new LinkedListNFromBack(MAX_ELEMENTS);
 	delete linkedListNFromBack; linkedListNFromBack = NULL;
+	*/
 
 	return 0;
 }

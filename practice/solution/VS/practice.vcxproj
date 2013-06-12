@@ -16,6 +16,7 @@
     <ClCompile Include="..\..\src\FullJoin.cpp" />
     <ClCompile Include="..\..\src\InsertSort.cpp" />
     <ClCompile Include="..\..\src\InsertSortSTL.cpp" />
+    <ClCompile Include="..\..\src\IntBinaryTreeNodeContent.cpp" />
     <ClCompile Include="..\..\src\LinkedList.cpp" />
     <ClCompile Include="..\..\src\LinkedListLoop.cpp" />
     <ClCompile Include="..\..\src\LinkedListNFromBack.cpp" />

@@ -2,18 +2,15 @@
 #include "../include/BinaryTreeNode.h"
 using namespace std;
 
-template <typename T>
-BinaryTreeNode<T>::BinaryTreeNode(void) : left(NULL), right(NULL)
+BinaryTreeNode::BinaryTreeNode(void) : info(NULL), left(NULL), right(NULL)
 {
 }
 
-template <typename T>
-BinaryTreeNode<T>::BinaryTreeNode(const BinaryTreeNode<T>& b) : info(b.info), left(b.left), right(b.right)
+BinaryTreeNode::BinaryTreeNode(const BinaryTreeNode& b) : info(b.info), left(b.left), right(b.right)
 {
 }
 
-template <typename T>
-BinaryTreeNode<T>& BinaryTreeNode<T>::operator=(const BinaryTreeNode<T>& b)
+BinaryTreeNode& BinaryTreeNode::operator=(const BinaryTreeNode& b)
 {
 	if (this == &b) return *this; // handle self assignment
 	this->info = b.info;
@@ -22,43 +19,37 @@ BinaryTreeNode<T>& BinaryTreeNode<T>::operator=(const BinaryTreeNode<T>& b)
 	return *this;
 }
 
-template <typename T>
-BinaryTreeNode<T>::~BinaryTreeNode(void)
+BinaryTreeNode::~BinaryTreeNode(void)
 {
+	delete info; info = NULL;
 }
 
-template <typename T>
-T BinaryTreeNode<T>::getInfo()
+IBinaryTreeNodeContent& BinaryTreeNode::getInfo()
 {
-	return this->info;
+	return *(this->info);
 }
 
-template <typename T>
-BinaryTreeNode<T>* BinaryTreeNode<T>::getLeft()
+BinaryTreeNode* BinaryTreeNode::getLeft()
 {
 	return this->left;
 }
 
-template <typename T>
-BinaryTreeNode<T>* BinaryTreeNode<T>::getRight()
+BinaryTreeNode* BinaryTreeNode::getRight()
 {
 	return this->right;
 }
 
-template <typename T>
-void BinaryTreeNode<T>::setInfo(T value)
+void BinaryTreeNode::setInfo(IBinaryTreeNodeContent* value)
 {
 	this->info = value;
 }
 
-template <typename T>
-void BinaryTreeNode<T>::setLeft(BinaryTreeNode<T>* value)
+void BinaryTreeNode::setLeft(BinaryTreeNode* value)
 {
 	this->left = value;
 }
 
-template <typename T>
-void BinaryTreeNode<T>::setRight(BinaryTreeNode<T>* value)
+void BinaryTreeNode::setRight(BinaryTreeNode* value)
 {
 	this->right = value;
 }

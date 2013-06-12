@@ -4,39 +4,34 @@
 #include <cassert>
 #include "../include/BinaryTreeNode.h"
 #include "../include/BinaryTree.h"
-#include "../src/BinaryTreeNode.cpp"
+#include "../include/IBinaryTreeNodeContent.h"
 using namespace std;
 
-template <typename T>
-BinaryTree<T>::BinaryTree(unsigned maxElements) : root(NULL), maxElements(maxElements)
+BinaryTree::BinaryTree(unsigned maxElements, IBinaryTreeNodeContent* (*generator)()) : root(NULL), maxElements(maxElements)
 {
 	Init();
-	this->Build();
+	this->Build(generator);
 	this->Display();
 }
 
-template <typename T>
-BinaryTree<T>::BinaryTree(const BinaryTree<T>& b) : root(b.root)
+BinaryTree::BinaryTree(const BinaryTree& b) : root(b.root)
 {
 	Init();
 }
 
-template <typename T>
-BinaryTree<T>& BinaryTree<T>::operator=(const BinaryTree<T>& b)
+BinaryTree& BinaryTree::operator=(const BinaryTree& b)
 {
 	if (this == &b) return *this; // handle self assignment
 	this->root = b.root;
 	return *this;
 }
 
-template <typename T>
-BinaryTree<T>::~BinaryTree(void)
+BinaryTree::~BinaryTree(void)
 {
 	this->Free(this->root);
 }
 
-template <typename T>
-void BinaryTree<T>::Init(void)
+void BinaryTree::Init(void)
 {
 	if (!initialized)
 	{
@@ -45,26 +40,31 @@ void BinaryTree<T>::Init(void)
 	}
 }
 
-template <typename T>
-void BinaryTree<T>::Build(void)
+void BinaryTree::Build(IBinaryTreeNodeContent* (*generator)())
 {
+	unsigned failedInsertions = 0;
 	this->numberOfElements = rand() % this->maxElements + 1;
 	cout << "Number of elements: " << this->numberOfElements << endl;
-	for (int i = 0; i < this->numberOfElements; i++)
+	for (unsigned i = 0; i < this->numberOfElements; i++)
 	{
-		BinaryTreeNode<T>* node = new BinaryTreeNode<T>();
+		BinaryTreeNode* node = new BinaryTreeNode();
 		if (node == NULL)
 		{
 			cout << "Memory allocation failed!" << endl;
 			this->Free(this->root);
 			return;
 		}
-		node->setInfo(rand());
+		node->setInfo(generator());
 		node->setLeft(NULL);
 		node->setRight(NULL);
 
-		this->InsertNode(node);
+		if (!this->InsertNode(node))
+		{
+			failedInsertions++;
+		}
 	}
+
+	this->numberOfElements -= failedInsertions;
 	this->Display();
 
 	this->GeneratePreOrder(this->root);
@@ -73,9 +73,9 @@ void BinaryTree<T>::Build(void)
 
 	for (unsigned i = 0; i < this->numberOfElements; i++)
 	{
-		this->rebuiltPreOrder.push_back(-1);
-		this->rebuiltInOrder.push_back(-1);
-		this->rebuiltPostOrder.push_back(-1);
+		this->rebuiltPreOrder.push_back(NULL);
+		this->rebuiltInOrder.push_back(NULL);
+		this->rebuiltPostOrder.push_back(NULL);
 	}
 
 	this->RebuildPreOrder(0, this->numberOfElements - 1, 0, this->numberOfElements - 1, 0, this->numberOfElements - 1);
@@ -90,14 +90,13 @@ void BinaryTree<T>::Build(void)
 	}
 }
 
-template <typename T>
-void BinaryTree<T>::RebuildPreOrder(unsigned startPreOrder, unsigned endPreOrder, unsigned startInOrder, unsigned endInOrder, unsigned startPostOrder, unsigned endPostOrder)
+void BinaryTree::RebuildPreOrder(unsigned startPreOrder, unsigned endPreOrder, unsigned startInOrder, unsigned endInOrder, unsigned startPostOrder, unsigned endPostOrder)
 {
 	if (endPreOrder < startPreOrder || endPreOrder >= this->numberOfElements)
 	{
 		return;
 	}
-	T lastPostValue = this->postOrder[endPostOrder];
+	IBinaryTreeNodeContent* lastPostValue = this->postOrder[endPostOrder];
 
 	unsigned indexOfLastPostInInOrder = std::find(this->inOrder.begin(), this->inOrder.end(), lastPostValue) - this->inOrder.begin();
 	int leftSpan = (indexOfLastPostInInOrder - 1) - startInOrder;
@@ -108,19 +107,18 @@ void BinaryTree<T>::RebuildPreOrder(unsigned startPreOrder, unsigned endPreOrder
 	this->RebuildPreOrder(endPreOrder - rightSpan, endPreOrder, endInOrder - rightSpan, endInOrder, (endPostOrder - 1) - rightSpan, endPostOrder - 1);
 }
 
-template <typename T>
-void BinaryTree<T>::RebuildInOrder(unsigned startPreOrder, unsigned endPreOrder, unsigned startInOrder, unsigned endInOrder, unsigned startPostOrder, unsigned endPostOrder)
+void BinaryTree::RebuildInOrder(unsigned startPreOrder, unsigned endPreOrder, unsigned startInOrder, unsigned endInOrder, unsigned startPostOrder, unsigned endPostOrder)
 {
 	if (endInOrder < startInOrder || endInOrder >= this->numberOfElements)
 	{
 		return;
 	}
-	T lastPostValue = this->postOrder[endPostOrder];
+	IBinaryTreeNodeContent* lastPostValue = this->postOrder[endPostOrder];
 	assert ((startPreOrder+1) < this->numberOfElements);
 	assert (endPostOrder > 0);
 
-	T secondInPreOrder = this->preOrder[startPreOrder + 1];
-	T secondLastInPostOrder = this->postOrder[endPostOrder - 1];
+	IBinaryTreeNodeContent* secondInPreOrder = this->preOrder[startPreOrder + 1];
+	IBinaryTreeNodeContent* secondLastInPostOrder = this->postOrder[endPostOrder - 1];
 	unsigned indexOfSecondPreOrderInPostOrder = std::find(this->postOrder.begin(), this->postOrder.end(), secondInPreOrder) - this->postOrder.begin();
 	unsigned indexOfSecondLastPostOrderInPreOrder = std::find(this->preOrder.begin(), this->preOrder.end(), secondLastInPostOrder) - this->preOrder.begin();
 
@@ -132,14 +130,13 @@ void BinaryTree<T>::RebuildInOrder(unsigned startPreOrder, unsigned endPreOrder,
 	this->RebuildInOrder(endPreOrder - rightSpan, endPreOrder, endInOrder - rightSpan, endInOrder, endPostOrder - 1 - rightSpan, endPostOrder - 1);
 }
 
-template <typename T>
-void BinaryTree<T>::RebuildPostOrder(unsigned startPreOrder, unsigned endPreOrder, unsigned startInOrder, unsigned endInOrder, unsigned startPostOrder, unsigned endPostOrder)
+void BinaryTree::RebuildPostOrder(unsigned startPreOrder, unsigned endPreOrder, unsigned startInOrder, unsigned endInOrder, unsigned startPostOrder, unsigned endPostOrder)
 {
 	if (endPostOrder < startPostOrder || endPostOrder >= this->numberOfElements)
 	{
 		return;
 	}
-	T firstPreValue = this->preOrder[startPreOrder];
+	IBinaryTreeNodeContent* firstPreValue = this->preOrder[startPreOrder];
 
 	unsigned indexOfFirstPreInInOrder = std::find(this->inOrder.begin(), this->inOrder.end(), firstPreValue) - this->inOrder.begin();
 	int leftSpan = (indexOfFirstPreInInOrder - 1) - startInOrder;
@@ -150,28 +147,26 @@ void BinaryTree<T>::RebuildPostOrder(unsigned startPreOrder, unsigned endPreOrde
 	this->RebuildPostOrder(endPreOrder - rightSpan, endPreOrder, endInOrder - rightSpan, endInOrder, (endPostOrder - 1) - rightSpan, endPostOrder - 1);
 }
 
-template <typename T>
-void BinaryTree<T>::Display(void)
+void BinaryTree::Display(void)
 {
 	this->DisplayPreOrder(this->root);
 	this->DisplayInOrder(this->root);
 	this->DisplayPostOrder(this->root);
 }
 
-template <typename T>
-BinaryTreeNode<T>* BinaryTree<T>::FindPreOrderParent(T info, BinaryTreeNode<T>* node)
+BinaryTreeNode* BinaryTree::FindPreOrderParent(IBinaryTreeNodeContent* info, BinaryTreeNode* node)
 {
 	if (node == NULL)
 	{
 		return NULL;
 	}
 
-	BinaryTree<T>* next = NULL;
-	if (node->getInfo() < info)
+	BinaryTreeNode* next = NULL;
+	if (node->getInfo() < *info)
 	{
 		next = this->FindPreOrderParent(info, node->getRight());
 	}
-	else if (node->getInfo() > info)
+	else if (node->getInfo() > *info)
 	{
 		next = this->FindPreOrderParent(info, node->getLeft());
 	}
@@ -179,16 +174,14 @@ BinaryTreeNode<T>* BinaryTree<T>::FindPreOrderParent(T info, BinaryTreeNode<T>* 
 	return (next == NULL) ? node : next;
 }
 
-template <typename T>
-void BinaryTree<T>::GeneratePreOrder(BinaryTreeNode<T>* node)
+void BinaryTree::GeneratePreOrder(BinaryTreeNode* node)
 {
 	unsigned index = 0;
 
 	this->GeneratePreOrder(node, index);
 }
 
-template <typename T>
-void BinaryTree<T>::GeneratePreOrder(BinaryTreeNode<T>* node, unsigned& index)
+void BinaryTree::GeneratePreOrder(BinaryTreeNode* node, unsigned& index)
 {
 	if (node == NULL)
 	{
@@ -196,25 +189,23 @@ void BinaryTree<T>::GeneratePreOrder(BinaryTreeNode<T>* node, unsigned& index)
 	}
 	for (unsigned i = this->preOrder.size(); i <= index; i++)
 	{
-		this->preOrder.push_back(-1);
+		this->preOrder.push_back(NULL);
 	}
-	int value = node->getInfo();;
-	this->preOrder[index] = value;
+	IBinaryTreeNodeContent& value = node->getInfo();
+	this->preOrder[index] = &value;
 	index += 1;
 	this->GeneratePreOrder(node->getLeft(), index);
 	this->GeneratePreOrder(node->getRight(), index);
 }
 
-template <typename T>
-void BinaryTree<T>::GenerateInOrder(BinaryTreeNode<T>* node)
+void BinaryTree::GenerateInOrder(BinaryTreeNode* node)
 {
 	unsigned index = 0;
 
 	this->GenerateInOrder(node, index);
 }
 
-template <typename T>
-void BinaryTree<T>::GenerateInOrder(BinaryTreeNode<T>* node, unsigned& index)
+void BinaryTree::GenerateInOrder(BinaryTreeNode* node, unsigned& index)
 {
 	if (node == NULL)
 	{
@@ -225,25 +216,23 @@ void BinaryTree<T>::GenerateInOrder(BinaryTreeNode<T>* node, unsigned& index)
 
 	for (unsigned i = this->inOrder.size(); i <= index; i++)
 	{
-		this->inOrder.push_back(-1);
+		this->inOrder.push_back(NULL);
 	}
-	int value = node->getInfo();;
-	this->inOrder[index] = value;
+	IBinaryTreeNodeContent& value = node->getInfo();
+	this->inOrder[index] = &value;
 	index += 1;
 
 	this->GenerateInOrder(node->getRight(), index);
 }
 
-template <typename T>
-void BinaryTree<T>::GeneratePostOrder(BinaryTreeNode<T>* node)
+void BinaryTree::GeneratePostOrder(BinaryTreeNode* node)
 {
 	unsigned index = 0;
 
 	this->GeneratePostOrder(node, index);
 }
 
-template <typename T>
-void BinaryTree<T>::GeneratePostOrder(BinaryTreeNode<T>* node, unsigned& index)
+void BinaryTree::GeneratePostOrder(BinaryTreeNode* node, unsigned& index)
 {
 	if (node == NULL)
 	{
@@ -255,15 +244,14 @@ void BinaryTree<T>::GeneratePostOrder(BinaryTreeNode<T>* node, unsigned& index)
 
 	for (unsigned i = this->postOrder.size(); i <= index; i++)
 	{
-		this->postOrder.push_back(-1);
+		this->postOrder.push_back(NULL);
 	}
-	int value = node->getInfo();;
-	this->postOrder[index] = value;
+	IBinaryTreeNodeContent& value = node->getInfo();
+	this->postOrder[index] = &value;
 	index += 1;
 }
 
-template <typename T>
-void BinaryTree<T>::DisplayPreOrder(BinaryTreeNode<T>* node)
+void BinaryTree::DisplayPreOrder(BinaryTreeNode* node)
 {
 	if (node == this->root)
 	{
@@ -273,13 +261,13 @@ void BinaryTree<T>::DisplayPreOrder(BinaryTreeNode<T>* node)
 	{
 		return;
 	}
-	cout << node->getInfo() << endl;
+	node->getInfo().Display();
+	cout << endl;
 	this->DisplayPreOrder(node->getLeft());
 	this->DisplayPreOrder(node->getRight());
 }
 
-template <typename T>
-void BinaryTree<T>::DisplayInOrder(BinaryTreeNode<T>* node)
+void BinaryTree::DisplayInOrder(BinaryTreeNode* node)
 {
 	if (node == this->root)
 	{
@@ -290,12 +278,12 @@ void BinaryTree<T>::DisplayInOrder(BinaryTreeNode<T>* node)
 		return;
 	}
 	this->DisplayInOrder(node->getLeft());
-	cout << node->getInfo() << endl;
+	node->getInfo().Display();
+	cout << endl;
 	this->DisplayInOrder(node->getRight());
 }
 
-template <typename T>
-void BinaryTree<T>::DisplayPostOrder(BinaryTreeNode<T>* node)
+void BinaryTree::DisplayPostOrder(BinaryTreeNode* node)
 {
 	if (node == this->root)
 	{
@@ -307,16 +295,17 @@ void BinaryTree<T>::DisplayPostOrder(BinaryTreeNode<T>* node)
 	}
 	this->DisplayPostOrder(node->getLeft());
 	this->DisplayPostOrder(node->getRight());
-	cout << node->getInfo() << endl;
+	node->getInfo().Display();
+	cout << endl;
 }
 
-template <typename T>
-void BinaryTree<T>::InsertNode(BinaryTreeNode<T>* parent, BinaryTreeNode<T>* node)
+bool BinaryTree::InsertNode(BinaryTreeNode* parent, BinaryTreeNode* node)
 {
 	if (node->getInfo() == parent->getInfo())
 	{
-		cout << "Dropping: " << node->getInfo() << endl;
-		return;
+		parent->getInfo().nodeAlreadyPresentAction();
+		cout << "Dropping: "; node->getInfo().Display(); cout << endl;
+		return false;
 	}
 
 	if (node->getInfo() < parent->getInfo())
@@ -324,11 +313,11 @@ void BinaryTree<T>::InsertNode(BinaryTreeNode<T>* parent, BinaryTreeNode<T>* nod
 		if (parent->getLeft() == NULL)
 		{
 			parent->setLeft(node);
-			cout << "Added: " << node->getInfo() << " to the left of: " << parent->getInfo() <<endl;
+			cout << "Added: "; node->getInfo().Display(); cout << " to the left of: "; parent->getInfo().Display(); cout <<endl;
 		}
 		else
 		{
-		this->InsertNode(parent->getLeft(), node);
+			return this->InsertNode(parent->getLeft(), node);
 		}
 	}
 	else
@@ -336,34 +325,33 @@ void BinaryTree<T>::InsertNode(BinaryTreeNode<T>* parent, BinaryTreeNode<T>* nod
 		if (parent->getRight() == NULL)
 		{
 			parent->setRight(node);
-			cout << "Added: " << node->getInfo() << " to the right of: " << parent->getInfo() <<endl;
+			cout << "Added: "; node->getInfo().Display(); cout << " to the right of: "; parent->getInfo().Display(); cout <<endl;
 		}
 		else
 		{
-		this->InsertNode(parent->getRight(), node);
+			return this->InsertNode(parent->getRight(), node);
 		}
 	}
+	return true;
 }
 
-template <typename T>
-void BinaryTree<T>::InsertNode(BinaryTreeNode<T>* node)
+bool BinaryTree::InsertNode(BinaryTreeNode* node)
 {
 	if (this->root == NULL)
 	{
 		this->root = node;
-		cout << "Added as root: " << node->getInfo() << endl;
-		return;
+		cout << "Added as root: "; node->getInfo().Display(); cout << endl;
+		return true;
 	}
-	this->InsertNode(this->root, node);
+	return this->InsertNode(this->root, node);
 }
 
-template <typename T>
-void BinaryTree<T>::Free(BinaryTreeNode<T>* node)
+void BinaryTree::Free(BinaryTreeNode* node)
 {
 	if (node != NULL)
 	{
 		this->Free(node->getLeft());
-		cout << "Deleting: " << node->getInfo() << endl;
+		cout << "Deleting: "; node->getInfo().Display(); cout << endl;
 		this->Free(node->getRight());
 
 		delete node;
@@ -371,5 +359,4 @@ void BinaryTree<T>::Free(BinaryTreeNode<T>* node)
 	}
 }
 
-template <typename T>
-bool BinaryTree<T>::initialized;
+bool BinaryTree::initialized;

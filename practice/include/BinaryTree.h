@@ -5,29 +5,28 @@
 #include <vector>
 using namespace std;
 
-template <typename T>
 class BinaryTree
 {
 	protected:
-		BinaryTreeNode<T>* root;
+		BinaryTreeNode* root;
 		static bool initialized;
 		unsigned maxElements;
 		unsigned numberOfElements;
-		vector<T> preOrder;
-		vector<T> inOrder;
-		vector<T> postOrder;
-		vector<T> rebuiltPreOrder;
-		vector<T> rebuiltInOrder;
-		vector<T> rebuiltPostOrder;
+		vector<IBinaryTreeNodeContent*> preOrder;
+		vector<IBinaryTreeNodeContent*> inOrder;
+		vector<IBinaryTreeNodeContent*> postOrder;
+		vector<IBinaryTreeNodeContent*> rebuiltPreOrder;
+		vector<IBinaryTreeNodeContent*> rebuiltInOrder;
+		vector<IBinaryTreeNodeContent*> rebuiltPostOrder;
 
 	public:
-		BinaryTree(unsigned);
+		BinaryTree(unsigned, IBinaryTreeNodeContent* (*generator)());
 		BinaryTree(const BinaryTree& b);
 		BinaryTree& operator=(const BinaryTree& b);
 
-		void GeneratePreOrder(BinaryTreeNode<T>* node);
-		void GenerateInOrder(BinaryTreeNode<T>* node);
-		void GeneratePostOrder(BinaryTreeNode<T>* node);
+		void GeneratePreOrder(BinaryTreeNode* node);
+		void GenerateInOrder(BinaryTreeNode* node);
+		void GeneratePostOrder(BinaryTreeNode* node);
 
 		void RebuildPreOrder(unsigned startPreOrder, unsigned endPreOrder, unsigned startInOrder, unsigned endInOrder, unsigned startPostOrder, unsigned endPostOrder);
 		void RebuildInOrder(unsigned startPreOrder, unsigned endPreOrder, unsigned startInOrder, unsigned endInOrder, unsigned startPostOrder, unsigned endPostOrder);
@@ -37,18 +36,18 @@ class BinaryTree
 
 	protected:
 		static void Init(void);
-		void Build(void);
+		void Build(IBinaryTreeNodeContent* (*generator)());
 		void Display(void);
-		BinaryTreeNode<T>* FindPreOrderParent(T info, BinaryTreeNode<T>* node);
-		void DisplayPreOrder(BinaryTreeNode<T>* node);
-		void DisplayInOrder(BinaryTreeNode<T>* node);
-		void DisplayPostOrder(BinaryTreeNode<T>* node);
-		void InsertNode(BinaryTreeNode<T>* parent, BinaryTreeNode<T>* node);
-		void InsertNode(BinaryTreeNode<T>* node);
-		void Free(BinaryTreeNode<T>* node);
-		void GeneratePreOrder(BinaryTreeNode<T>* node, unsigned& index);
-		void GenerateInOrder(BinaryTreeNode<T>* node, unsigned& index);
-		void GeneratePostOrder(BinaryTreeNode<T>* node, unsigned& index);
+		BinaryTreeNode* FindPreOrderParent(IBinaryTreeNodeContent* info, BinaryTreeNode* node);
+		void DisplayPreOrder(BinaryTreeNode* node);
+		void DisplayInOrder(BinaryTreeNode* node);
+		void DisplayPostOrder(BinaryTreeNode* node);
+		bool InsertNode(BinaryTreeNode* parent, BinaryTreeNode* node);
+		bool InsertNode(BinaryTreeNode* node);
+		void Free(BinaryTreeNode* node);
+		void GeneratePreOrder(BinaryTreeNode* node, unsigned& index);
+		void GenerateInOrder(BinaryTreeNode* node, unsigned& index);
+		void GeneratePostOrder(BinaryTreeNode* node, unsigned& index);
 };
 
 #endif //_BinaryTree_H

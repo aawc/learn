@@ -1,11 +1,12 @@
 #ifndef _BinaryTreeNode_H
 #define _BinaryTreeNode_H
 
-template <typename T>
+class IBinaryTreeNodeContent;
+
 class BinaryTreeNode
 {
 	private:
-		T info;
+		IBinaryTreeNodeContent* info;
 		BinaryTreeNode* left;
 		BinaryTreeNode* right;
 
@@ -15,10 +16,10 @@ class BinaryTreeNode
 		BinaryTreeNode(const BinaryTreeNode& b);
 		BinaryTreeNode& operator=(const BinaryTreeNode& b);
 
-		T getInfo();
+		IBinaryTreeNodeContent& getInfo();
 		BinaryTreeNode* getLeft();
 		BinaryTreeNode* getRight();
-		void setInfo(T);
+		void setInfo(IBinaryTreeNodeContent*);
 		void setLeft(BinaryTreeNode*);
 		void setRight(BinaryTreeNode*);
 };
