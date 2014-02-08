@@ -3,6 +3,7 @@
 import math;
 
 N = 600851475143
+N = 137437904894
 
 def isPrime(n):
   sqrt_n = int(math.sqrt(n))
