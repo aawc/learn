@@ -1,5 +1,5 @@
 """
-Checks the if not test on various empty values to see their behavior.
+Performs the not test on various empty values to see their behavior.
 """
 
 import logging
