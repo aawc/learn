@@ -59,7 +59,7 @@ def main():
   costs = {}
   for house_num in range(number_of_houses):
     costs[house_num] = {}
-    for color in enumerate(colors):
+    for color in colors:
       costs[house_num][color] = random.randint(1, max_value)
   print costs
   print assign_color(costs, colors)
