@@ -69,7 +69,6 @@ def main():
     for _ in range(n):
         x, y = raw_input().split(" ")
         pairs.append({'x': int(x), 'y': int(y)})
-    print pairs
     for pair in pairs:
         x = int(pair['x'] - 1)
         y = int(pair['y'] - 1)
