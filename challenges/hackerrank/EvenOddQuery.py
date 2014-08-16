@@ -58,22 +58,17 @@ def main():
     """
     Ugh, pylint, this is for you!
     """
-    array = []
-    n = input("Enter array size: ")
+    n = int(raw_input())
     if n <= 0:
         return
-    print "Enter {0} positive integers:".format(n)
-    for _ in range(n):
-        array.append(input())
-    n = input("Enter the number of pairs: ")
+    array = map(int, raw_input().split(" "))
+    n = int(raw_input())
     if n <= 0:
         return
     pairs = []
-    print "Enter {0} pairs:".format(n)
     for _ in range(n):
-        x = input()
-        y = input()
-        pairs.append({'x': x, 'y': y})
+        x, y = raw_input().split(" ")
+        pairs.append({'x': int(x), 'y': int(y)})
     print pairs
     for pair in pairs:
         x = int(pair['x'] - 1)
