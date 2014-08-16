@@ -74,7 +74,7 @@ def main():
         x = int(pair['x'] - 1)
         y = int(pair['y'] - 1)
         numberIsOdd = findIsOdd(array, x, y)
-        print x, y, getOddOrEvenLabel(numberIsOdd)
+        print getOddOrEvenLabel(numberIsOdd)
 
 
 if __name__ == "__main__":
