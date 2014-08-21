@@ -31,11 +31,10 @@ int main() {
     unsigned x = pairs[i].first;
     unsigned y = pairs[i].second;
 #if DEBUG
-    cout << x << ", " << y << ": " ;
+    cout << x << ", " << y << ": ";
 #endif
     bool number_is_odd = isOdd(find(numbers, x-1, y-1));
-    string out = number_is_odd ? "Odd" : "Even";
-    cout << out << endl;
+    cout << (number_is_odd ? "Odd" : "Even") << endl;
   }
   return 0;
 }
@@ -53,25 +52,15 @@ unsigned find(
 #endif
     return 1;
   }
-#if BASE_ONLY
+
   unsigned base = numbers[x];
   unsigned exponent = ((y == x) || numbers[x+1]) ? 1 : 0;
-  long double out = pow(base, exponent);
+  unsigned out = exponent ? base : 1;
 #if DEBUG==2
   cout << "(" << x << ", " << y << "): pow(" << base <<
     ", " << exponent << ") = " << out << ", ";
 #endif
   return out;
-#else
-  unsigned base = numbers[x];
-  unsigned exponent = find(numbers, x+1, y);
-  long double out = pow(base, exponent);
-#if DEBUG==2
-  cout << "(" << x << ", " << y << "): pow(" << base <<
-    ", " << exponent << ") = " << out << ", ";
-#endif
-  return out;
-#endif
 }
 
 bool isOdd(unsigned x) {
