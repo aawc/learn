@@ -55,7 +55,7 @@ unsigned find(
   }
 #if BASE_ONLY
   unsigned base = numbers[x];
-  unsigned exponent = (numbers[x+1] || (y == x)) ? 1 : 0;
+  unsigned exponent = ((y == x) || numbers[x+1]) ? 1 : 0;
   long double out = pow(base, exponent);
 #if DEBUG==2
   cout << "(" << x << ", " << y << "): pow(" << base <<
