@@ -27,17 +27,17 @@ Odd
 Even
 """
 
+
 # pylint: disable=invalid-name
 # pylint: disable=bad-builtin
-def findIsOdd(array, x, y):
+def find(array, x, y):
     """
     The crux function
     """
     if x > y:
-        return True
-    # We could call the following function, but I don't think we need to:
-    # return isOdd(math.pow(array[x], find(array, x+1, y)))
-    return isOdd(array[x])
+        return 1
+    out = array[x] ** (1 if array[x+1] else 0)
+    return out
 
 
 def isOdd(number):
@@ -58,21 +58,21 @@ def main():
     """
     Ugh, pylint, this is for you!
     """
-    n = int(raw_input())
+    n = long(raw_input())
     if n <= 0:
         return
-    array = map(int, raw_input().split(" "))
-    n = int(raw_input())
+    array = map(long, raw_input().split(" "))
+    n = long(raw_input())
     if n <= 0:
         return
     pairs = []
     for _ in range(n):
         x, y = raw_input().split(" ")
-        pairs.append({'x': int(x), 'y': int(y)})
+        pairs.append({'x': long(x), 'y': long(y)})
     for pair in pairs:
-        x = int(pair['x'] - 1)
-        y = int(pair['y'] - 1)
-        numberIsOdd = findIsOdd(array, x, y)
+        x = pair['x']
+        y = pair['y']
+        numberIsOdd = isOdd(find(array, x-1, y-1))
         print getOddOrEvenLabel(numberIsOdd)
 
 
