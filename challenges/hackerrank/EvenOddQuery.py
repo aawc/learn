@@ -36,7 +36,7 @@ def find(array, x, y):
     """
     if x > y:
         return 1
-    out = array[x] ** (1 if array[x+1] else 0)
+    out = array[x] ** (1 if (array[x+1] or y == x) else 0)
     return out
 
 
