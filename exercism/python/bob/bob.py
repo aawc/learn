@@ -1,18 +1,9 @@
-#
-# Skeleton file for the Python "Bob" exercise.
-#
-
 def hey(what):
-    what = what.strip()
+    what = unicode(what.strip())
     if not what:
         return 'Fine. Be that way!'
-
-    known_abbrv = set(['OK', 'DMV'])
-    for abbr in known_abbrv:
-        what = what.replace(abbr, '')
-
-    if unicode(what).isupper():
+    if what.isupper():
         return 'Whoa, chill out!'
-    elif what[-1] == '?':
+    if what.endswith('?'):
         return 'Sure.'
     return 'Whatever.'
