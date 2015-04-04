@@ -5,8 +5,8 @@ def slices(digits, length):
     elif length <= 0:
         raise ValueError('Length needs to be positive.')
 
-    return_list = list()
+    return_list = []
     for start in range(digits_length - length + 1):
         current_slice = digits[start:start+length]
-        return_list.append(map(int, list(current_slice)))
+        return_list.append([int(n) for n in current_slice])
     return return_list
