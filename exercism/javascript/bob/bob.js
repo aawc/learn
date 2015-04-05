@@ -8,9 +8,11 @@ var Bob = function() {};
 Bob.prototype.hey = function(input) {
   if (!input.trim()) {
     return "Fine. Be that way!";
-  } else if (input === input.toUpperCase() && input.match(/[A-Z]/i)) {
+  }
+  if (input === input.toUpperCase() && input.match(/[A-Z]/i)) {
     return "Whoa, chill out!";
-  } else if (input.endsWith("?")) {
+  }
+  if (input.endsWith("?")) {
     return "Sure.";
   }
   return "Whatever.";
