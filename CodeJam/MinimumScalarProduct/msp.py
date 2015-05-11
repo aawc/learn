@@ -25,41 +25,14 @@ import logging
 import sys
 
 
-MAP = {}
-
-
 def CalculateMSP(logger, l1, l2, level=0):
-  if not l1 or not l2:
-    return 0
-
-  key = ",".join(l1 + l2)
-  if key in MAP:
-    logger.debug('f(l1=%s, l2=%s, level=%d), key=%s' % (l1, l2, level, key))
-    return MAP[key]
-
-  minimum_sum = float('inf')
-  logger.debug('f(l1=%s, l2=%s, level=%d)' % (l1, l2, level))
-  for i in range(len(l1)):
-    v1 = l1.pop(i)
-    for j in range(len(l2)):
-      v2 = l2.pop(j)
-      logger.debug('level=%d, i=%s, j=%s=v1=%s, v2=%s' % (level, i, j, v1, v2))
-      sum_next_steps = CalculateMSP(logger, l1, l2, level+1)
-      this_value = int(v1) * int(v2)
-      this_sum = this_value + sum_next_steps
-      logger.debug(
-          'level=%d, v1=%s, v2=%s, this_value=%s, sum_next_steps=%s, this_sum=%s, minimum_sum=%s' % (
-            level, v1, v2, this_value, sum_next_steps, this_sum, minimum_sum))
-      if this_sum < minimum_sum:
-        minimum_sum = this_sum
-        logger.debug('New minimum_sum=%d' % minimum_sum)
-      l2.insert(j, v2)
-    l1.insert(i, v1)
-
-  logger.debug('f(l1=%s, l2=%s, level=%d), key=%s, minimum_sum=%d' % (
-    l1, l2, level, key, minimum_sum))
-  MAP[key] = minimum_sum
-  return minimum_sum
+  l1 = [int(x) for x in l1]
+  l2 = [int(x) for x in l2]
+  result = 0
+  for a, b in zip(sorted(l1), reversed(sorted(l2))):
+    result += a*b
+  logger.debug('result: %s' % result)
+  return result
 
 
 def GetInputAndCalculate(logger):
