@@ -4,3 +4,9 @@ vector: vector.o
 vector.o: vector.cc
 		g++ -g -std=c++11 -c  vector.cc
 
+unique_ptr: unique_ptr.o
+		g++ -g -o unique_ptr unique_ptr.o
+
+unique_ptr.o: unique_ptr.cc
+		g++ -g -std=c++11 -c  unique_ptr.cc
+
