@@ -22,5 +22,7 @@ int main()
   std::string::iterator iter = lastname.begin();
   std::string partial_lastname(iter+5, iter+8);
   std::cout << "Hello, " << partial_lastname << "!\n";
+
+  return 0;
 }
 
