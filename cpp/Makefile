@@ -1,13 +1,19 @@
-all: string this_ptr unique_ptr unordered_map vector
+all: string stringtohex this_ptr unique_ptr unordered_map vector
 
 clean:
-	$(RM) string this_ptr unique_ptr unordered_map vector
+	$(RM) string stringtohex this_ptr unique_ptr unordered_map vector
 
 string: string.o
 		g++ -g3 -o string string.o
 
 string.o: string.cc
 		g++ -g3 -std=c++11 -c  string.cc
+
+stringtohex: stringtohex.o
+		g++ -g3 -o stringtohex stringtohex.o
+
+stringtohex.o: stringtohex.cc
+		g++ -g3 -std=c++11 -c  stringtohex.cc
 
 this_ptr: this_ptr.o
 		g++ -g3 -o this_ptr this_ptr.o
