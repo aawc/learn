@@ -48,5 +48,12 @@ int main()
   print(map);
 
   print(map);
+
+  std::cout << "Map in loop:" << std::endl;
+  for (size_t i = 0; i < 5; i++) {
+    IntToStringMap another_map;
+    another_map[i] = "i";
+    print(another_map);
+  }
 }
 
