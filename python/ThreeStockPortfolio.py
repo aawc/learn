@@ -1,11 +1,11 @@
-A = "BND"
-B = "VXUS"
-C = "VTI"
-D = "MM"
+BONDS = "VBTLX/BND"
+INTERNATIONAL = "VTIAX/VXUS"
+STOCK = "VTSAX/VTI"
+MONEY_MARKET = "MM"
 
-ratio_a = 0.3
-ratio_b = 0.1
-ratio_c = 0.6
+ratio_bonds = 0.3
+ratio_international = 0.1
+ratio_stock = 0.6
 
 def InputAsFloat(s):
   response = raw_input("Enter current value of %s: " % s)
@@ -20,15 +20,15 @@ def GetMoneyToInvest(total, current_investment, ratio, ticker):
   return "Invest %f in %s" % (to_invest, ticker)
 
 def main():
-  a = InputAsFloat(A)
-  b = InputAsFloat(B)
-  c = InputAsFloat(C)
-  d = InputAsFloat(D)
-  total = a + b + c + d
+  bonds = InputAsFloat(BONDS)
+  international = InputAsFloat(INTERNATIONAL)
+  stock = InputAsFloat(STOCK)
+  money_market = InputAsFloat(MONEY_MARKET)
+  total = bonds + international + stock + money_market
   print "Total: %f" % total
-  print GetMoneyToInvest(total, a, ratio_a, A)
-  print GetMoneyToInvest(total, b, ratio_b, B)
-  print GetMoneyToInvest(total, c, ratio_c, C)
+  print GetMoneyToInvest(total, bonds, ratio_bonds, BONDS)
+  print GetMoneyToInvest(total, international, ratio_international, INTERNATIONAL)
+  print GetMoneyToInvest(total, stock, ratio_stock, STOCK)
 
 if __name__ == '__main__':
   main()
